@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://chenzhao11.github.io">
-  <title>test.md | nobodyZhao</title>
+  <title>Fully Convolutional Image Classification on Arbitrary Sized Image | nobodyZhao</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="测试文件夹">
+  <meta name="description" content="FC网络和CONV网络的区别在于输入时前者关注的是全局的特征，后者关注局部的特征。但是他们本质上是相似的因为这两者都是在计算点积，所以两者是可以相互转换的。 例如，一个FC的输入是一个5*5*16的tensor，输出的尺寸是120。转换的时候就可以使用120个5*5*16的filter来卷积，卷积核的大小是等于整个图片的大小的padding&#x3D;0，stride&#x3D;1这样就可以像全连接一样根据全局的特征">
 <meta property="og:type" content="article">
-<meta property="og:title" content="test.md">
-<meta property="og:url" content="https://chenzhao11.github.io/2021/10/13/test-md/index.html">
+<meta property="og:title" content="Fully Convolutional Image Classification on Arbitrary Sized Image">
+<meta property="og:url" content="https://chenzhao11.github.io/2021/10/14/Fully-Convolutional-Image-Classification-on-Arbitrary-Sized-Image/index.html">
 <meta property="og:site_name" content="nobodyZhao">
-<meta property="og:description" content="测试文件夹">
+<meta property="og:description" content="FC网络和CONV网络的区别在于输入时前者关注的是全局的特征，后者关注局部的特征。但是他们本质上是相似的因为这两者都是在计算点积，所以两者是可以相互转换的。 例如，一个FC的输入是一个5*5*16的tensor，输出的尺寸是120。转换的时候就可以使用120个5*5*16的filter来卷积，卷积核的大小是等于整个图片的大小的padding&#x3D;0，stride&#x3D;1这样就可以像全连接一样根据全局的特征">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-10-13T13:56:50.000Z">
-<meta property="article:modified_time" content="2021-10-13T13:57:47.422Z">
+<meta property="article:published_time" content="2021-10-14T08:45:43.000Z">
+<meta property="article:modified_time" content="2021-10-14T09:05:25.108Z">
 <meta property="article:author" content="Zhao Chen">
-<meta property="article:tag" content="hello">
+<meta property="article:tag" content="CNN">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="nobodyZhao" type="application/atom+xml">
@@ -149,27 +149,28 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-test-md" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Fully-Convolutional-Image-Classification-on-Arbitrary-Sized-Image" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      test.md
+      Fully Convolutional Image Classification on Arbitrary Sized Image
     </h1>
   
 
         
-        <a href="/2021/10/13/test-md/" class="archive-article-date">
-  	<time datetime="2021-10-13T13:56:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-13</time>
+        <a href="/2021/10/14/Fully-Convolutional-Image-Classification-on-Arbitrary-Sized-Image/" class="archive-article-date">
+  	<time datetime="2021-10-14T08:45:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-14</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>测试文件夹  </p>
+        <p>FC网络和CONV网络的区别在于输入时前者关注的是全局的特征，后者关注局部的特征。但是他们本质上是相似的因为这两者都是在计算点积，所以两者是可以相互转换的。 例如，一个FC的输入是一个5*5*16的tensor，输出的尺寸是120。转换的时候就可以使用120个5*5*16的filter来卷积，卷积核的大小是等于整个图片的大小的padding=0，stride=1这样就可以像全连接一样根据全局的特征输出。</p>
+<p><a target="_blank" rel="noopener" href="https://learnopencv.com/fully-convolutional-image-classification-on-arbitrary-sized-image/">参考链接</a></p>
 
       
 
@@ -204,7 +205,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">hello</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CNN</a>
         		</li>
       		
 		</ul>
@@ -260,7 +261,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://chenzhao11.github.io/2021/10/13/test-md/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://chenzhao11.github.io/2021/10/14/Fully-Convolutional-Image-Classification-on-Arbitrary-Sized-Image/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -274,18 +275,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/10/14/Fully-Convolutional-Image-Classification-on-Arbitrary-Sized-Image/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Fully Convolutional Image Classification on Arbitrary Sized Image
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/10/13/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hello World</div>
+    <a href="/2021/10/13/test-md/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">test.md</div>
       <i class="icon-circle-right"></i>
     </a>
   
