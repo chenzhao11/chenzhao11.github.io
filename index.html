@@ -146,6 +146,134 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Java中日期格式化工具类-SimpleDateFormat" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/18/Java%E4%B8%AD%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%B7%A5%E5%85%B7%E7%B1%BB-SimpleDateFormat/">Java中日期格式化工具类--SimpleDateFormat</a>
+    </h1>
+  
+
+        
+        <a href="/2021/10/18/Java%E4%B8%AD%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%B7%A5%E5%85%B7%E7%B1%BB-SimpleDateFormat/" class="archive-article-date">
+  	<time datetime="2021-10-18T04:52:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="日期格式化工具类SimpleDateFormat"><a href="#日期格式化工具类SimpleDateFormat" class="headerlink" title="日期格式化工具类SimpleDateFormat"></a>日期格式化工具类SimpleDateFormat</h1><h2 id="使用原因"><a href="#使用原因" class="headerlink" title="使用原因"></a>使用原因</h2><p>使用Date类的无参数构造函数得到的日期格式不是想要的格式。位于<code>java.text.SimpleDateFormat</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SimpleDateFormatDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Date currentTime = <span class="keyword">new</span> Date();</span><br><span class="line">        System.out.println(currentTime); <span class="comment">// 输出：Mon Feb 18 10:24:30 CST 2019</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="格式化Date到String输出"><a href="#格式化Date到String输出" class="headerlink" title="格式化Date到String输出"></a>格式化Date到String输出</h2><p>使用format()方法，我们可以将日期类型转换为自己自定义的字符串格式，如2019-02-18，2019/02/18，2019-02-18 10:24:30等，自定义格式如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th align="center">格式</th>
+<th align="center">含义</th>
+<th align="center">举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">yyyy</td>
+<td align="center">年</td>
+<td align="center">2019</td>
+</tr>
+<tr>
+<td align="center">MM</td>
+<td align="center">月</td>
+<td align="center">02</td>
+</tr>
+<tr>
+<td align="center">dd</td>
+<td align="center">日</td>
+<td align="center">18</td>
+</tr>
+<tr>
+<td align="center">HH</td>
+<td align="center">小时(24)</td>
+<td align="center">14</td>
+</tr>
+<tr>
+<td align="center">mm</td>
+<td align="center">分钟</td>
+<td align="center">53</td>
+</tr>
+<tr>
+<td align="center">ss</td>
+<td align="center">秒</td>
+<td align="center">52</td>
+</tr>
+<tr>
+<td align="center">SSS</td>
+<td align="center">毫秒</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.text.SimpleDateFormat;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SimpleDateFormatDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        Date currentTime = <span class="keyword">new</span> Date();</span><br><span class="line"></span><br><span class="line">        System.out.println(currentTime);    <span class="comment">// Mon Feb 18 13:53:50 CST 2019</span></span><br><span class="line"></span><br><span class="line">        SimpleDateFormat simpleDateFormat1 = <span class="keyword">new</span> SimpleDateFormat(<span class="string">&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;</span>);</span><br><span class="line"></span><br><span class="line">        SimpleDateFormat simpleDateFormat2 = <span class="keyword">new</span> SimpleDateFormat(<span class="string">&quot;yyyy-MM-dd&quot;</span>);</span><br><span class="line"></span><br><span class="line">        SimpleDateFormat simpleDateFormat3 = <span class="keyword">new</span> SimpleDateFormat(<span class="string">&quot;yyyy/MM/dd&quot;</span>);</span><br><span class="line"></span><br><span class="line">        System.out.println(simpleDateFormat1.format(currentTime));  <span class="comment">// 输出2019-02-18 13:53:50.629</span></span><br><span class="line"></span><br><span class="line">        System.out.println(simpleDateFormat2.format(currentTime));  <span class="comment">// 输出2019-02-18</span></span><br><span class="line"></span><br><span class="line">        System.out.println(simpleDateFormat3.format(currentTime));  <span class="comment">// 输出2019/02/18</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="从String格式化到Date"><a href="#从String格式化到Date" class="headerlink" title="从String格式化到Date"></a>从String格式化到Date</h2><p>在实际开发过程中，我们经常需要将字符串转换为日期类型，以进行后续操作，此时可以使用parse()方法，但需要注意：如果字符串与指定的格式不匹配，会报java.text.ParseException异常</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">import java.text.ParseException;</span><br><span class="line">import java.text.SimpleDateFormat;</span><br><span class="line">import java.util.Date;</span><br><span class="line">public class SimpleDateFormatDemo &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm&quot;);</span><br><span class="line">            String strDate1 = &quot;2019-02-18 13:58&quot;;</span><br><span class="line">            String strDate2 = &quot;2019-02-18&quot;;</span><br><span class="line">            Date date1 = simpleDateFormat1.parse(strDate1);</span><br><span class="line">            System.out.println(date1);</span><br><span class="line">            Date date2 = simpleDateFormat1.parse(strDate2);</span><br><span class="line">            System.out.println(date2);</span><br><span class="line"></span><br><span class="line">        &#125; catch (ParseException e) &#123;</span><br><span class="line"></span><br><span class="line">            e.printStackTrace();</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Java 日期格式化</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/10/18/Java%E4%B8%AD%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%B7%A5%E5%85%B7%E7%B1%BB-SimpleDateFormat/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Fully-Convolutional-Image-Classification-on-Arbitrary-Sized-Image" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -489,6 +617,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">CNN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Java 日期格式化</a>
               </li>
             
             <div class="clearfix"></div>
