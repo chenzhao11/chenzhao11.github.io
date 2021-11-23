@@ -146,81 +146,824 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-Java中日期格式化工具类-SimpleDateFormat" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-链表的前序与后序遍历" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/18/Java%E4%B8%AD%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%B7%A5%E5%85%B7%E7%B1%BB-SimpleDateFormat/">Java中日期格式化工具类--SimpleDateFormat</a>
+      <a class="article-title" href="/2021/11/23/%E9%93%BE%E8%A1%A8%E7%9A%84%E5%89%8D%E5%BA%8F%E4%B8%8E%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/">链表的前序与后序遍历</a>
     </h1>
   
 
         
-        <a href="/2021/10/18/Java%E4%B8%AD%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%B7%A5%E5%85%B7%E7%B1%BB-SimpleDateFormat/" class="archive-article-date">
-  	<time datetime="2021-10-18T04:52:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-18</time>
+        <a href="/2021/11/23/%E9%93%BE%E8%A1%A8%E7%9A%84%E5%89%8D%E5%BA%8F%E4%B8%8E%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/" class="archive-article-date">
+  	<time datetime="2021-11-23T08:50:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-23</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="日期格式化工具类SimpleDateFormat"><a href="#日期格式化工具类SimpleDateFormat" class="headerlink" title="日期格式化工具类SimpleDateFormat"></a>日期格式化工具类SimpleDateFormat</h1><h2 id="使用原因"><a href="#使用原因" class="headerlink" title="使用原因"></a>使用原因</h2><p>使用Date类的无参数构造函数得到的日期格式不是想要的格式。位于<code>java.text.SimpleDateFormat</code></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SimpleDateFormatDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Date currentTime = <span class="keyword">new</span> Date();</span><br><span class="line">        System.out.println(currentTime); <span class="comment">// 输出：Mon Feb 18 10:24:30 CST 2019</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p><a target="_blank" rel="noopener" href="https://labuladong.gitee.io/algo/2/17/19/">参考链接</a></p>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/palindrome-linked-list">234.回文链表（简单）</a></p>
+<p>对于二叉树的几种遍历方式，我们再熟悉不过了：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">traverse</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 前序遍历代码</span></span><br><span class="line">    traverse(root.left);</span><br><span class="line">    <span class="comment">// 中序遍历代码</span></span><br><span class="line">    traverse(root.right);</span><br><span class="line">    <span class="comment">// 后序遍历代码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="格式化Date到String输出"><a href="#格式化Date到String输出" class="headerlink" title="格式化Date到String输出"></a>格式化Date到String输出</h2><p>使用format()方法，我们可以将日期类型转换为自己自定义的字符串格式，如2019-02-18，2019/02/18，2019-02-18 10:24:30等，自定义格式如下表所示：</p>
+<p>在 <a target="_blank" rel="noopener" href="https://labuladong.gitee.io/algo/1/2/">学习数据结构的框架思维</a> 中说过，链表兼具递归结构，树结构不过是链表的衍生。那么，<strong>链表其实也可以有前序遍历和后序遍历</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">traverse</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 前序遍历代码</span></span><br><span class="line">    traverse(head.next);</span><br><span class="line">    <span class="comment">// 后序遍历代码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个框架有什么指导意义呢？如果我想正序打印链表中的 <code>val</code> 值，可以在前序遍历位置写代码；反之，如果想倒序遍历链表，就可以在后序遍历位置操作：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 倒序打印单链表中的元素值 */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">traverse</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (head == <span class="keyword">null</span>) <span class="keyword">return</span>;</span><br><span class="line">    traverse(head.next);</span><br><span class="line">    <span class="comment">// 后序遍历代码</span></span><br><span class="line">    print(head.val);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>** 树本身可以看成是一种特殊的链表结构，树的遍历可以有前序后续与中序，链表可以后前序和后序遍历，这样对于单链表也可以倒序遍历**</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LeetCode</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/11/23/%E9%93%BE%E8%A1%A8%E7%9A%84%E5%89%8D%E5%BA%8F%E4%B8%8E%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-TreeMap与红黑树" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/18/TreeMap%E4%B8%8E%E7%BA%A2%E9%BB%91%E6%A0%91/">TreeMap与红黑树</a>
+    </h1>
+  
+
+        
+        <a href="/2021/11/18/TreeMap%E4%B8%8E%E7%BA%A2%E9%BB%91%E6%A0%91/" class="archive-article-date">
+  	<time datetime="2021-11-18T02:39:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="4-1-TreeMap"><a href="#4-1-TreeMap" class="headerlink" title="4.1 TreeMap"></a>4.1 TreeMap</h3><p>在Map集合框架中，除了HashMap以外，TreeMap也是我们工作中常用到的集合对象之一。</p>
+<p>与HashMap相比，TreeMap是一个能比较元素大小的Map集合，会对传入的key进行了大小排序。其中，可以使用元素的自然顺序，也可以使用集合中自定义的比较器来进行排序；</p>
+<p>不同于HashMap的哈希映射，TreeMap底层实现了树形结构，至于具体形态，你可以简单的理解为一颗倒过来的树—<strong>根在上–叶在下</strong>。如果用计算机术语来说的话，TreeMap实现了红黑树的结构，形成了一颗二叉树。</p>
+<p>至于什么是二叉树，什么是红黑树，我们后面再谈，你现在只需要记住它是一颗倒过来的树，就OK了。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5621908-9e7544ea7dd5670c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/486/format/webp" alt="img"></p>
+<p>TreeMap继承于AbstractMap，实现了Map, Cloneable, NavigableMap, Serializable接口。</p>
+<p>(1)TreeMap 继承于AbstractMap，而AbstractMap实现了Map接口，并实现了Map接口中定义的方法，减少了其子类继承的复杂度；</p>
+<p>(2)TreeMap 实现了Map接口，成为Map框架中的一员，可以包含着key–value形式的元素；</p>
+<p>(3)TreeMap 实现了NavigableMap接口，意味着拥有了更强的元素搜索能力；</p>
+<p>(4)TreeMap 实现了Cloneable接口，实现了clone()方法，可以被克隆；</p>
+<p>(5)TreeMap 实现了Java.io.Serializable接口，支持序列化操作，可通过Hessian协议进行传输；</p>
+<p>对于Cloneable, Serializable来说，我们再熟悉不过，基本上Java集合框架中的每一个类都会实现这2个接口，而NavigableMap接口是干什么的，它定义了什么样的功能？接下来，我们就通过NavigableMap的源码来看下！</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5621908-b574ac50e5200807.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/221/format/webp" alt="img"></p>
+<p>根据上面的截图，我们首先介绍下NavigableMap体系中的SortedMap接口：</p>
+<p>对于SortedMap来说，该类是TreeMap体系中的父接口，也是区别于HashMap体系最关键的一个接口。</p>
+<p>主要原因就是SortedMap接口中定义的第一个方法—Comparator&lt;? super K&gt; comparator()；</p>
+<p>该方法决定了TreeMap体系的走向，有了比较器，就可以对插入的元素进行排序了；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">SortedMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">Map</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//返回元素比较器。如果是自然顺序，则返回null；</span></span><br><span class="line">    Comparator&lt;? <span class="keyword">super</span> K&gt; comparator();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//返回从fromKey到toKey的集合：含头不含尾</span></span><br><span class="line">    java.util.<span class="function">SortedMap&lt;K,V&gt; <span class="title">subMap</span><span class="params">(K fromKey, K toKey)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回从头到toKey的集合：不包含toKey</span></span><br><span class="line">    java.util.<span class="function">SortedMap&lt;K,V&gt; <span class="title">headMap</span><span class="params">(K toKey)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回从fromKey到结尾的集合：包含fromKey</span></span><br><span class="line">    java.util.<span class="function">SortedMap&lt;K,V&gt; <span class="title">tailMap</span><span class="params">(K fromKey)</span></span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//返回集合中的第一个元素：</span></span><br><span class="line">    <span class="function">K <span class="title">firstKey</span><span class="params">()</span></span>;</span><br><span class="line">   </span><br><span class="line">    <span class="comment">//返回集合中的最后一个元素：</span></span><br><span class="line">    <span class="function">K <span class="title">lastKey</span><span class="params">()</span></span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//返回集合中所有key的集合：</span></span><br><span class="line">    <span class="function">Set&lt;K&gt; <span class="title">keySet</span><span class="params">()</span></span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//返回集合中所有value的集合：</span></span><br><span class="line">    <span class="function">Collection&lt;V&gt; <span class="title">values</span><span class="params">()</span></span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//返回集合中的元素映射：</span></span><br><span class="line">    Set&lt;Map.Entry&lt;K, V&gt;&gt; entrySet();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面介绍了SortedMap接口，而NavigableMap接口又是对SortedMap进一步的扩展：主要增加了对集合内元素的搜索获取操作，例如：返回集合中某一区间内的元素、返回小于大于某一值的元素等类似操作。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">NavigableMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">SortedMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回小于key的第一个元素：</span></span><br><span class="line">    Map.<span class="function">Entry&lt;K,V&gt; <span class="title">lowerEntry</span><span class="params">(K key)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回小于key的第一个键：</span></span><br><span class="line">    <span class="function">K <span class="title">lowerKey</span><span class="params">(K key)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回小于等于key的第一个元素：</span></span><br><span class="line">    Map.<span class="function">Entry&lt;K,V&gt; <span class="title">floorEntry</span><span class="params">(K key)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回小于等于key的第一个键：</span></span><br><span class="line">    <span class="function">K <span class="title">floorKey</span><span class="params">(K key)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回大于或者等于key的第一个元素：</span></span><br><span class="line">    Map.<span class="function">Entry&lt;K,V&gt; <span class="title">ceilingEntry</span><span class="params">(K key)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回大于或者等于key的第一个键：</span></span><br><span class="line">    <span class="function">K <span class="title">ceilingKey</span><span class="params">(K key)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回大于key的第一个元素：</span></span><br><span class="line">    Map.<span class="function">Entry&lt;K,V&gt; <span class="title">higherEntry</span><span class="params">(K key)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回大于key的第一个键：</span></span><br><span class="line">    <span class="function">K <span class="title">higherKey</span><span class="params">(K key)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回集合中第一个元素：</span></span><br><span class="line">    Map.<span class="function">Entry&lt;K,V&gt; <span class="title">firstEntry</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回集合中最后一个元素：</span></span><br><span class="line">    Map.<span class="function">Entry&lt;K,V&gt; <span class="title">lastEntry</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回集合中第一个元素，并从集合中删除：</span></span><br><span class="line">    Map.<span class="function">Entry&lt;K,V&gt; <span class="title">pollFirstEntry</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回集合中最后一个元素，并从集合中删除：</span></span><br><span class="line">    Map.<span class="function">Entry&lt;K,V&gt; <span class="title">pollLastEntry</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回倒序的Map集合：</span></span><br><span class="line">    java.util.<span class="function">NavigableMap&lt;K,V&gt; <span class="title">descendingMap</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">NavigableSet&lt;K&gt; <span class="title">navigableKeySet</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回Map集合中倒序的Key组成的Set集合：</span></span><br><span class="line">    <span class="function">NavigableSet&lt;K&gt; <span class="title">descendingKeySet</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    java.util.<span class="function">NavigableMap&lt;K,V&gt; <span class="title">subMap</span><span class="params">(K fromKey, <span class="keyword">boolean</span> fromInclusive,</span></span></span><br><span class="line"><span class="params"><span class="function">                                       K toKey, <span class="keyword">boolean</span> toInclusive)</span></span>;</span><br><span class="line"></span><br><span class="line">    java.util.<span class="function">NavigableMap&lt;K,V&gt; <span class="title">headMap</span><span class="params">(K toKey, <span class="keyword">boolean</span> inclusive)</span></span>;</span><br><span class="line"></span><br><span class="line">    java.util.<span class="function">NavigableMap&lt;K,V&gt; <span class="title">tailMap</span><span class="params">(K fromKey, <span class="keyword">boolean</span> inclusive)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">SortedMap&lt;K,V&gt; <span class="title">subMap</span><span class="params">(K fromKey, K toKey)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">SortedMap&lt;K,V&gt; <span class="title">headMap</span><span class="params">(K toKey)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">SortedMap&lt;K,V&gt; <span class="title">tailMap</span><span class="params">(K fromKey)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其实，NavigableMap的目的很简单、很直接，就是增强了对集合内元素的搜索、获取的功能，当子类TreeMap实现时，自然获取以上的功能；</p>
+<p>TreeMap具有如下特点：</p>
+<ul>
+<li>不允许出现重复的key；</li>
+<li>可以插入null键，null值；</li>
+<li>可以对元素进行排序；</li>
+<li>无序集合（插入和遍历顺序不一致）；</li>
+</ul>
+<h3 id="4-2-TreeMap基本操作"><a href="#4-2-TreeMap基本操作" class="headerlink" title="4.2 TreeMap基本操作"></a>4.2 TreeMap基本操作</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">TreeMapTest</span> </span>&#123;</span><br><span class="line">    public <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="built_in">String</span>[] agrs)&#123;</span><br><span class="line">        <span class="comment">//创建TreeMap对象：</span></span><br><span class="line">        TreeMap&lt;<span class="built_in">String</span>,Integer&gt; treeMap = <span class="keyword">new</span> TreeMap&lt;<span class="built_in">String</span>,Integer&gt;();</span><br><span class="line">        System.out.println(<span class="string">&quot;初始化后,TreeMap元素个数为：&quot;</span> + treeMap.size());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//新增元素:</span></span><br><span class="line">        treeMap.put(<span class="string">&quot;hello&quot;</span>,<span class="number">1</span>);</span><br><span class="line">        treeMap.put(<span class="string">&quot;world&quot;</span>,<span class="number">2</span>);</span><br><span class="line">        treeMap.put(<span class="string">&quot;my&quot;</span>,<span class="number">3</span>);</span><br><span class="line">        treeMap.put(<span class="string">&quot;name&quot;</span>,<span class="number">4</span>);</span><br><span class="line">        treeMap.put(<span class="string">&quot;is&quot;</span>,<span class="number">5</span>);</span><br><span class="line">        treeMap.put(<span class="string">&quot;jiaboyan&quot;</span>,<span class="number">6</span>);</span><br><span class="line">        treeMap.put(<span class="string">&quot;i&quot;</span>,<span class="number">6</span>);</span><br><span class="line">        treeMap.put(<span class="string">&quot;am&quot;</span>,<span class="number">6</span>);</span><br><span class="line">        treeMap.put(<span class="string">&quot;a&quot;</span>,<span class="number">6</span>);</span><br><span class="line">        treeMap.put(<span class="string">&quot;developer&quot;</span>,<span class="number">6</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;添加元素后,TreeMap元素个数为：&quot;</span> + treeMap.size());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//遍历元素：</span></span><br><span class="line">        <span class="built_in">Set</span>&lt;<span class="built_in">Map</span>.Entry&lt;<span class="built_in">String</span>,Integer&gt;&gt; entrySet = treeMap.entrySet();</span><br><span class="line">        <span class="keyword">for</span>(<span class="built_in">Map</span>.Entry&lt;<span class="built_in">String</span>,Integer&gt; entry : entrySet)&#123;</span><br><span class="line">            <span class="built_in">String</span> key = entry.getKey();</span><br><span class="line">            Integer value = entry.getValue();</span><br><span class="line">            System.out.println(<span class="string">&quot;TreeMap元素的key:&quot;</span>+key+<span class="string">&quot;,value:&quot;</span>+value);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//获取所有的key：</span></span><br><span class="line">        <span class="built_in">Set</span>&lt;<span class="built_in">String</span>&gt; keySet = treeMap.keySet();</span><br><span class="line">        <span class="keyword">for</span>(<span class="built_in">String</span> strKey:keySet)&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;TreeMap集合中的key:&quot;</span>+strKey);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//获取所有的value:</span></span><br><span class="line">        Collection&lt;Integer&gt; valueList = treeMap.values();</span><br><span class="line">        <span class="keyword">for</span>(Integer intValue:valueList)&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;TreeMap集合中的value:&quot;</span> + intValue);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//获取元素：</span></span><br><span class="line">        Integer getValue = treeMap.<span class="keyword">get</span>(<span class="string">&quot;jiaboyan&quot;</span>);<span class="comment">//获取集合内元素key为&quot;jiaboyan&quot;的值</span></span><br><span class="line">        <span class="built_in">String</span> firstKey = treeMap.firstKey();<span class="comment">//获取集合内第一个元素</span></span><br><span class="line">        <span class="built_in">String</span> lastKey =treeMap.lastKey();<span class="comment">//获取集合内最后一个元素</span></span><br><span class="line">        <span class="built_in">String</span> lowerKey =treeMap.lowerKey(<span class="string">&quot;jiaboyan&quot;</span>);<span class="comment">//获取集合内的key小于&quot;jiaboyan&quot;的key</span></span><br><span class="line">        <span class="built_in">String</span> ceilingKey =treeMap.ceilingKey(<span class="string">&quot;jiaboyan&quot;</span>);<span class="comment">//获取集合内的key大于等于&quot;jiaboyan&quot;的key</span></span><br><span class="line">        SortedMap&lt;<span class="built_in">String</span>,Integer&gt; sortedMap =treeMap.subMap(<span class="string">&quot;a&quot;</span>,<span class="string">&quot;my&quot;</span>);<span class="comment">//获取集合的key从&quot;a&quot;到&quot;jiaboyan&quot;的元素</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//删除元素：</span></span><br><span class="line">        Integer removeValue = treeMap.remove(<span class="string">&quot;jiaboyan&quot;</span>);<span class="comment">//删除集合中key为&quot;jiaboyan&quot;的元素</span></span><br><span class="line">        treeMap.clear(); <span class="comment">//清空集合元素：</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//判断方法：</span></span><br><span class="line">        boolean isEmpty = treeMap.isEmpty();<span class="comment">//判断集合是否为空</span></span><br><span class="line">        boolean isContain = treeMap.containsKey(<span class="string">&quot;jiaboyan&quot;</span>);<span class="comment">//判断集合的key中是否包含&quot;jiaboyan&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-3-TreeMap排序"><a href="#4-3-TreeMap排序" class="headerlink" title="4.3 TreeMap排序"></a>4.3 TreeMap排序</h3><p>上一节，通过代码展示出TreeMap简单使用。而早在第一小节，笔者就说过TreeMap是一个可以对元素进行排序的集合，那么究竟怎么排序呢？</p>
+<p>（1）使用元素自然排序</p>
+<p>在使用自然顺序排序时候，需要区分两种情况：一种是Jdk定义的对象，一种是我们应用自己定义的对象；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SortedTest</span> <span class="keyword">implements</span> <span class="title">Comparable</span>&lt;<span class="title">SortedTest</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SortedTest</span><span class="params">(<span class="keyword">int</span> age)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//自定义对象，实现compareTo(T o)方法：</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(SortedTest sortedTest)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> num = <span class="keyword">this</span>.age - sortedTest.getAge();</span><br><span class="line">        <span class="comment">//为0时候，两者相同：</span></span><br><span class="line">        <span class="keyword">if</span>(num==<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//大于0时，传入的参数小：</span></span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(num&gt;<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="comment">//小于0时，传入的参数大：</span></span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TreeMapTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] agrs)</span></span>&#123;</span><br><span class="line">        <span class="comment">//自然顺序比较</span></span><br><span class="line">        naturalSort();</span><br><span class="line">    &#125;</span><br><span class="line">     <span class="comment">//自然排序顺序：</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">naturalSort</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//第一种情况：Integer对象</span></span><br><span class="line">        TreeMap&lt;Integer,String&gt; treeMapFirst = <span class="keyword">new</span> TreeMap&lt;Integer, String&gt;();</span><br><span class="line">        treeMapFirst.put(<span class="number">1</span>,<span class="string">&quot;jiaboyan&quot;</span>);</span><br><span class="line">        treeMapFirst.put(<span class="number">6</span>,<span class="string">&quot;jiaboyan&quot;</span>);</span><br><span class="line">        treeMapFirst.put(<span class="number">3</span>,<span class="string">&quot;jiaboyan&quot;</span>);</span><br><span class="line">        treeMapFirst.put(<span class="number">10</span>,<span class="string">&quot;jiaboyan&quot;</span>);</span><br><span class="line">        treeMapFirst.put(<span class="number">7</span>,<span class="string">&quot;jiaboyan&quot;</span>);</span><br><span class="line">        treeMapFirst.put(<span class="number">13</span>,<span class="string">&quot;jiaboyan&quot;</span>);</span><br><span class="line">        System.out.println(treeMapFirst.toString());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//第二种情况:SortedTest对象</span></span><br><span class="line">        TreeMap&lt;SortedTest,String&gt; treeMapSecond = <span class="keyword">new</span> TreeMap&lt;SortedTest, String&gt;();</span><br><span class="line">        treeMapSecond.put(<span class="keyword">new</span> SortedTest(<span class="number">10</span>),<span class="string">&quot;jiaboyan&quot;</span>);</span><br><span class="line">        treeMapSecond.put(<span class="keyword">new</span> SortedTest(<span class="number">1</span>),<span class="string">&quot;jiaboyan&quot;</span>);</span><br><span class="line">        treeMapSecond.put(<span class="keyword">new</span> SortedTest(<span class="number">13</span>),<span class="string">&quot;jiaboyan&quot;</span>);</span><br><span class="line">        treeMapSecond.put(<span class="keyword">new</span> SortedTest(<span class="number">4</span>),<span class="string">&quot;jiaboyan&quot;</span>);</span><br><span class="line">        treeMapSecond.put(<span class="keyword">new</span> SortedTest(<span class="number">0</span>),<span class="string">&quot;jiaboyan&quot;</span>);</span><br><span class="line">        treeMapSecond.put(<span class="keyword">new</span> SortedTest(<span class="number">9</span>),<span class="string">&quot;jiaboyan&quot;</span>);</span><br><span class="line">        System.out.println(treeMapSecond.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在自然顺序比较中，需要让被比较的元素实现Comparable接口，否则在向集合里添加元素时报：”java.lang.ClassCastException: com.jiaboyan.collection.map.SortedTest cannot be cast to java.lang.Comparable”异常；</p>
+<p>这是因为在调用put()方法时，会将传入的元素转化成Comparable类型对象，所以当你传入的元素没有实现Comparable接口时，就无法转换，遍会报错；</p>
+<p>（2）使用自定义比较器排序</p>
+<p>使用自定义比较器排序，需要在创建TreeMap对象时，将自定义比较器对象传入到TreeMap构造方法中；</p>
+<p>自定义比较器对象，需要实现Comparator接口，并实现比较方法compare(T o1,T o2)；</p>
+<p>值得一提的是，使用自定义比较器排序的话，被比较的对象无需再实现Comparable接口了；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SortedTest</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SortedTest</span><span class="params">(<span class="keyword">int</span> age)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SortedTestComparator</span> <span class="keyword">implements</span> <span class="title">Comparator</span>&lt;<span class="title">SortedTest</span>&gt; </span>&#123;</span><br><span class="line">    <span class="comment">//自定义比较器：实现compare(T o1,T o2)方法：</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(SortedTest sortedTest1, SortedTest sortedTest2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> num = sortedTest1.getAge() - sortedTest2.getAge();</span><br><span class="line">        <span class="keyword">if</span>(num==<span class="number">0</span>)&#123;<span class="comment">//为0时候，两者相同：</span></span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(num&gt;<span class="number">0</span>)&#123;<span class="comment">//大于0时，后面的参数小：</span></span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;<span class="comment">//小于0时，前面的参数小：</span></span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TreeMapTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] agrs)</span></span>&#123;</span><br><span class="line">        <span class="comment">//自定义顺序比较</span></span><br><span class="line">        customSort();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//自定义排序顺序:</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">customSort</span><span class="params">()</span></span>&#123;</span><br><span class="line">        TreeMap&lt;SortedTest,String&gt; treeMap = <span class="keyword">new</span> TreeMap&lt;SortedTest, String&gt;(<span class="keyword">new</span> SortedTestComparator());</span><br><span class="line">        treeMap.put(<span class="keyword">new</span> SortedTest(<span class="number">10</span>),<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">        treeMap.put(<span class="keyword">new</span> SortedTest(<span class="number">21</span>),<span class="string">&quot;my&quot;</span>);</span><br><span class="line">        treeMap.put(<span class="keyword">new</span> SortedTest(<span class="number">15</span>),<span class="string">&quot;name&quot;</span>);</span><br><span class="line">        treeMap.put(<span class="keyword">new</span> SortedTest(<span class="number">2</span>),<span class="string">&quot;is&quot;</span>);</span><br><span class="line">        treeMap.put(<span class="keyword">new</span> SortedTest(<span class="number">1</span>),<span class="string">&quot;jiaboyan&quot;</span>);</span><br><span class="line">        treeMap.put(<span class="keyword">new</span> SortedTest(<span class="number">7</span>),<span class="string">&quot;world&quot;</span>);</span><br><span class="line">        System.out.println(treeMap.toString());</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>作者：贾博岩<br>链接：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/2dcff3634326">https://www.jianshu.com/p/2dcff3634326</a><br>来源：简书<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<h2 id="红黑树、B-树、B树的理解"><a href="#红黑树、B-树、B树的理解" class="headerlink" title="红黑树、B+树、B树的理解"></a>红黑树、B+树、B树的理解</h2><p>二叉搜索树-&gt;AVL  平衡二叉树</p>
+<p>B树-&gt; b+树</p>
+<p>红黑树</p>
+<p>搜索树中每一个节点只是包含一个数据，在后三者中 是包含的一个范围区间，B+树相较于B树在叶节点中增加了指针 。红黑树是对B树的改良，B数在插入删除的时候的效率低于红黑树，所以有的在内存中使用的一般是红黑树，只要是用B树的都可以用红黑树实现同样的效果。</p>
+<p>写在前面，好像不同的教材对b树，b-树的定义不一样。我就不纠结这个到底是叫b-树还是b-树了。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4717565-c361256ed1123010.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1200/format/webp" alt="img"></p>
+<p>image.png</p>
+<p><strong>如图所示，区别有以下两点：</strong></p>
+<ol>
+<li>B+树中只有叶子节点会带有指向记录的指针，而B树则所有节点都带有，在内部节点出现的索引项不会再出现在叶子节点中。</li>
+<li>B+树中所有叶子节点都是通过指针连接在一起，而B树不会。</li>
+</ol>
+<p><strong>B+树的优点：</strong></p>
+<ol>
+<li><strong>非叶子节点不会带上指向记录的指针，这样，一个块中可以容纳更多的索引项，</strong>一是可以降低树的高度。二是一个内部节点可以定位更多的叶子节点。</li>
+<li>叶子节点之间通过指针来连接，范围扫描将十分简单，而对于B树来说，则需要在叶子节点和内部节点不停的往返移动。<strong>具体的来讲，如何想扫描一次所有数据，对于b+树来说，可以从因为他们的叶子结点是连在一起的，所以可以横向的遍历过去。而对于b-树来说，就这能中序遍历了。</strong></li>
+</ol>
+<p><strong>B树的优点：</strong><br> 对于在内部节点的数据，可直接得到，不必根据叶子节点来定位。</p>
+<p><strong>B树长什么样子？</strong></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4717565-739b743a160bd7dd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/624/format/webp" alt="img"></p>
+<h5 id="红黑树和B树应用场景有何不同？"><a href="#红黑树和B树应用场景有何不同？" class="headerlink" title="红黑树和B树应用场景有何不同？"></a>红黑树和B树应用场景有何不同？</h5><h6 id="为什么要设计红黑树？"><a href="#为什么要设计红黑树？" class="headerlink" title="为什么要设计红黑树？"></a>为什么要设计红黑树？</h6><p>先说一下红黑树，红黑树有一个比较复杂的规则，红的结点balala怎么样，黑的结点balalal怎么样。大一大二学这些的时候，傻呵呵的想背课文一样背下来，当也不知道为什么要设计成这样。换一句话说，为什么平衡树和红黑树的区别是什么？为什么有了平衡树还要设计出来红黑树？</p>
+<p>红黑树的规则：<br> 1）每个结点要么是红的，要么是黑的。<br> 2）根结点是黑的。<br> 3）每个叶结点（叶结点即指树尾端NIL指针或NULL结点）是黑的。<br> 4）如果一个结点是红的，那么它的俩个儿子都是黑的。<br> 5）对于任一结点而言，其到叶结点树尾端NIL指针的每一条路径都包含相同数目的黑结点。</p>
+<p>现在想想，我的理解是<strong>平衡树（AVL）</strong>更平衡，结构上更加直观，时间效能针对读取而言更高，<strong>但是维护起来比较麻烦！！！</strong>（插入和删除之后，都需要rebalance）。但是，红黑树通过它规则的设定，确保了插入和删除的最坏的时间复杂度是O(log N) 。</p>
+<p>设计红黑树的目的，<strong>就是解决平衡树的维护起来比较麻烦的问题，红黑树，读取略逊于AVL，维护强于AVL，每次插入和删除的平均旋转次数应该是远小于平衡树。</strong></p>
+<p>小结一下：</p>
+<p>能用平衡树的地方，就可以用红黑树。用红黑树之后，读取略逊于AVL，维护强于AVL。</p>
+<h6 id="红黑树-和-b-树的用途有什么区别？"><a href="#红黑树-和-b-树的用途有什么区别？" class="headerlink" title="红黑树 和 b+树的用途有什么区别？"></a>红黑树 和 b+树的用途有什么区别？</h6><ol>
+<li>红黑树多用在内部排序，即全放在内存中的，STL的map和set的内部实现就是红黑树。</li>
+<li>B+树多用于外存上时，B+也被成为一个磁盘友好的数据结构。</li>
+</ol>
+<p><strong>为什么b+磁盘友好？</strong></p>
+<ol>
+<li>磁盘读写代价更低<br> 树的非叶子结点里面没有数据，这样索引比较小，可以放在一个blcok（或者尽可能少的blcok）里面。避免了树形结构不断的向下查找，然后磁盘不停的寻道，读数据。这样的设计，可以降低io的次数。</li>
+<li>查询效率更加稳定<br> 非终结点并不是最终指向文件内容的结点，而只是叶子结点中关键字的索引。所以任何关键字的查找必须走一条从根结点到叶子结点的路。所有关键字查询的路径长度相同，导致每一个数据的查询效率相当。</li>
+<li>遍历所有的数据更方便<br> B+树只要遍历叶子节点就可以实现整棵树的遍历，而其他的树形结构 要中序遍历才可以访问所有的数据。</li>
+</ol>
+<p>作者：DayDayUpppppp<br>链接：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/86a1fd2d7406">https://www.jianshu.com/p/86a1fd2d7406</a><br>来源：简书<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/11/18/TreeMap%E4%B8%8E%E7%BA%A2%E9%BB%91%E6%A0%91/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-PriorityQueue相关" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/18/PriorityQueue%E7%9B%B8%E5%85%B3/">PriorityQueue相关</a>
+    </h1>
+  
+
+        
+        <a href="/2021/11/18/PriorityQueue%E7%9B%B8%E5%85%B3/" class="archive-article-date">
+  	<time datetime="2021-11-18T02:09:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>Priority queue是抽象集合类的一个子类，实现了Queue接口。一方面priority queue提供了标准的队列方法：<br> 将元素放入队列：<code>add</code>，<code>offer</code><br> 将队首元素从队列删除：<code>remove</code>，<code>poll</code><br> 查看队列内的对首元素：<code>element</code>，<code>peek</code></p>
+<p>之不过，和标准队列不同的是，当删除队首元素的时候，删除的是<code>priority queue</code>中最小的元素。但是，<code>priority queue</code>并不是对所有的元素排序，其内部是用<code>heap</code>（堆）实现的。堆是一个自组织的二叉树，在这个二叉树里，<code>add</code>和<code>remove</code>操作使得最小的元素“吸引”到二叉树的根部，而不用在排列整个队列上耗费时间。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/8746739-9cf6e252807106d5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/699/format/webp" alt="img"></p>
+<p>pq.png</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">PriorityQueue&lt;Integer&gt; pq = <span class="keyword">new</span> PriorityQueue&lt;&gt;();</span><br><span class="line">pq.<span class="keyword">add</span>(<span class="number">3</span>);</span><br><span class="line">pq.<span class="keyword">add</span>(<span class="number">2</span>);</span><br><span class="line">pq.<span class="keyword">add</span>(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// first debug point</span></span><br><span class="line">System.<span class="keyword">out</span>.println(pq.peek());</span><br><span class="line">pq.poll();</span><br><span class="line"><span class="comment">// second debug point</span></span><br><span class="line">System.<span class="keyword">out</span>.println(pq.peek());</span><br></pre></td></tr></table></figure>
+
+<p>在第一个debug点：<br> 队列内元素的排列顺序为：1，3，2，也就是说新加入的元素因为最小，所以被放在了队首。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/8746739-06e6454689401ed9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/634/format/webp" alt="img"></p>
+<p>debug1.png</p>
+<p>在第二个debug点：<br> 队列内元素的排列顺序为：2，3，删除队首元素后，最小的元素就被“吸引”到了队首。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/8746739-7f3575af5b124465.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/594/format/webp" alt="img"></p>
+<p>debug2.png</p>
+<h3 id="高级用法"><a href="#高级用法" class="headerlink" title="高级用法"></a>高级用法</h3><p>就像TreeSet一样，一个priority queue要么存储的是实现了Comparable接口的元素，要么在构造函数中传入一个Comparator对象。</p>
+<ul>
+<li>Comparable</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PQItem</span> <span class="keyword">implements</span> <span class="title">Comparable</span>&lt;<span class="title">PQItem</span>&gt;</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Integer.toString(<span class="keyword">this</span>.getVal());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(PQItem o)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.getVal() - o.getVal();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> val = <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PQItem</span><span class="params">(<span class="keyword">int</span> val)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.val = val;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getVal</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> val;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setVal</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.val = val;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span></span>&#123;</span><br><span class="line">        PriorityQueue&lt;PQItem&gt; pq = <span class="keyword">new</span> PriorityQueue&lt;&gt;();</span><br><span class="line">        pq.add(<span class="keyword">new</span> PQItem(<span class="number">3</span>));</span><br><span class="line">        pq.add(<span class="keyword">new</span> PQItem(<span class="number">2</span>));</span><br><span class="line">        pq.add(<span class="keyword">new</span> PQItem(<span class="number">1</span>));</span><br><span class="line"></span><br><span class="line">        System.out.println(pq.peek());</span><br><span class="line">        pq.poll();</span><br><span class="line">        System.out.println(pq.peek());</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Comparator</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">test3</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    PriorityQueue&lt;PQItemNonSortable&gt; pq = <span class="keyword">new</span> PriorityQueue&lt;&gt;(<span class="keyword">new</span> Comparator&lt;PQItemNonSortable&gt;() &#123;</span><br><span class="line">        @Override</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="built_in">int</span> <span class="title">compare</span>(<span class="params">PQItemNonSortable o1, PQItemNonSortable o2</span>)</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> o1.getVal() - o2.getVal();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    pq.<span class="keyword">add</span>(<span class="keyword">new</span> PQItemNonSortable(<span class="number">3</span>));</span><br><span class="line">    pq.<span class="keyword">add</span>(<span class="keyword">new</span> PQItemNonSortable(<span class="number">2</span>));</span><br><span class="line">    pq.<span class="keyword">add</span>(<span class="keyword">new</span> PQItemNonSortable(<span class="number">1</span>));</span><br><span class="line"></span><br><span class="line">    System.<span class="keyword">out</span>.println(pq.peek());</span><br><span class="line">    pq.poll();</span><br><span class="line">    System.<span class="keyword">out</span>.println(pq.peek());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="典型用法"><a href="#典型用法" class="headerlink" title="典型用法"></a>典型用法</h3><p>Priority queue的典型用法就是job的schedule。每个job都有一个priority，可以以任何顺序将job添加到priority queue中。当能启动一个新的job的时候，队列中priority最高的job将被删除。</p>
+<p>作者：赵阳_c149<br>链接：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/2f9a0cd476d3">https://www.jianshu.com/p/2f9a0cd476d3</a><br>来源：简书<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/11/18/PriorityQueue%E7%9B%B8%E5%85%B3/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-MyRpc-day1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/17/MyRpc-day1/">MyRpc day1</a>
+    </h1>
+  
+
+        
+        <a href="/2021/11/17/MyRpc-day1/" class="archive-article-date">
+  	<time datetime="2021-11-17T08:39:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Map接口中的computeIfAbsent"><a href="#Map接口中的computeIfAbsent" class="headerlink" title="Map接口中的computeIfAbsent"></a>Map接口中的computeIfAbsent</h1><blockquote>
+<p><strong>Description copied from interface: <code>Map</code></strong></p>
+<p>If the specified key is not already associated with a value (or is mapped to <code>null</code>), attempts to compute its value using the given mapping function and enters it into this map unless <code>null</code>.</p>
+<p>If the function returns <code>null</code> no mapping is recorded. If the function itself throws an (unchecked) exception, the exception is rethrown, and no mapping is recorded. The most common usage is to construct a new object serving as an initial mapped value or memoized result, as in:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">map.computeIfAbsent(key, k -&gt; new Value(f(k)));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Or to implement a multi-value map, <code>Map&lt;K,Collection&lt;V&gt;&gt;</code>, supporting multiple values per key:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">map.computeIfAbsent(key, k -&gt; new HashSet&lt;V&gt;()).add(v);</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>当key对应的值不存在的时候会根据指定的<code>mappingFunction</code>创建一个新值然后放入到MAP中，如果<code>mappingFunction</code>的计算结果是null或者计算过程中抛出异常就不会放入到map中。如果本身含有值函数返回的是原本的值，不会对Map进行值更新。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">QA</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/11/17/MyRpc-day1/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-数据库中的分组TOPN问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/14/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%9A%84%E5%88%86%E7%BB%84TOPN%E9%97%AE%E9%A2%98/">数据库中的分组TOPN问题</a>
+    </h1>
+  
+
+        
+        <a href="/2021/11/14/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%9A%84%E5%88%86%E7%BB%84TOPN%E9%97%AE%E9%A2%98/" class="archive-article-date">
+  	<time datetime="2021-11-14T12:41:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="185-部门工资前三高的所有员工"><a href="#185-部门工资前三高的所有员工" class="headerlink" title="185. 部门工资前三高的所有员工"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/department-top-three-salaries/">185. 部门工资前三高的所有员工</a></h4><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/department-top-three-salaries/solution/tu-jie-sqlmian-shi-ti-jing-dian-topnwen-ti-by-houz/">题解与原理</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.mysqltutorial.org/mysql-window-functions/">关于窗口函数的参考资料</a></p>
+<p>与<code>group by</code>的区别</p>
+<blockquote>
+<p>Like the aggregate functions with the <code>GROUP BY</code> clause, window functions also operate on a subset of rows but they do not reduce the number of rows returned by the query.</p>
+</blockquote>
+<blockquote>
+<p>Note that window functions are performed on the result set after all <code>JOIN</code>, <code>WHERE</code>, <a target="_blank" rel="noopener" href="https://www.mysqltutorial.org/mysql-group-by.aspx"><code>GROUP BY</code></a>, and <code>HAVING</code> clauses and before the <code>ORDER BY</code>, <a target="_blank" rel="noopener" href="https://www.mysqltutorial.org/mysql-limit.aspx"><code>LIMIT</code></a> and <code>SELECT DISTINCT</code>.</p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SQL</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/11/14/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%9A%84%E5%88%86%E7%BB%84TOPN%E9%97%AE%E9%A2%98/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-SQL-QA" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/11/SQL-QA/">SQL QA</a>
+    </h1>
+  
+
+        
+        <a href="/2021/11/11/SQL-QA/" class="archive-article-date">
+  	<time datetime="2021-11-11T13:21:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li><p>聚集函数与where 和 having的关系</p>
+<p>聚集函数是对一组数据的统计结果，使用group by的时候就是对每一个小分组的数据的统计结果，不使用分组就是对where筛选出来的所有结果的统计结果。</p>
+<p>使用聚集函数需要有一个确定的列来统计，使用where条件过滤的时候还没有一个确定的列集所以<strong>在where中使用聚集函数会报错</strong>，不同的是在having中因为都是对分组过后的组做进一步的过滤所以一般都需要对组的整体情况做统计需要使用到聚合函数。</p>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">QA</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/11/11/SQL-QA/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-SQL之group-by" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/11/SQL%E4%B9%8Bgroup-by/">SQL之group by</a>
+    </h1>
+  
+
+        
+        <a href="/2021/11/11/SQL%E4%B9%8Bgroup-by/" class="archive-article-date">
+  	<time datetime="2021-11-11T13:13:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>SQL group by将数据按照指定的字段进行合并对应的没有指定的列可能存在有多个取值，这个时候需要使用聚合函数来处理，不然默认取分组的第一个记录作为有多个取值的列的显示值</strong></p>
+<p>我们可以将Group By操作想象成如下的一个过程，首先系统根据SELECT 语句得到一个结果集，如最开始的那个水果、出产国家、单价的一个详细表。然后根据分组字段，将具有相同分组字段的记录归并成了一条记录。这个时候剩下的那些不存在于Group By语句后面作为分组依据的字段就有可能出现多个值，但是目前一种分组情况只有一条记录，一个数据格是无法放入多个数值的，所以这里就需要通过一定的处理将这些多值的列转化成单值，然后将其放在对应的数据格中，那么完成这个步骤的就是聚合函数。这就是为什么这些函数叫聚合函数(aggregate functions)了。</p>
+<p>先来看下表1，表名为test：</p>
+<p><img src="https://pic3.zhimg.com/80/v2-4345f08a131f6dd9531629d3f8260f26_720w.jpg" alt="img"></p>
+<p>FROM test Group BY name：该句执行后，我们想象生成了<strong>虚拟表3，</strong>如下所图所示，生成过程是这样的：group by name，那么找name那一列，具有相同name值的行，合并成一行，如对于name值为aa的，那么&lt;1 aa 2&gt;与&lt;2 aa 3&gt;两行合并成1行，所有的id值和number值写到一个单元格里面。</p>
+<p><img src="https://pic2.zhimg.com/80/v2-1b953e4797629c5d6985ef26c8c78005_720w.jpg" alt="img"></p>
+<p>接下来就要针对<strong>虚拟表3</strong>执行Select语句了：</p>
+<p>（1）如果执行select *的话，那么返回的结果应该是虚拟表3，可是id和number中有的单元格里面的内容是多个值的，而关系数据库就是基于关系的，单元格中是不允许有多个值的，所以你看，执行select * 语句就报错了。</p>
+<p>（2）我们再看name列，每个单元格只有一个数据，所以我们select name的话，就没有问题了。为什么name列每个单元格只有一个值呢，因为我们就是用name列来group by的。</p>
+<p>（3）那么对于id和number里面的单元格有多个数据的情况怎么办呢？答案就是用<strong>聚合函数，聚合函数就用来输入多个数据，输出一个数据的。</strong>如cout(id)，sum(number)，而每个聚合函数的输入就是每一个多数据的单元格。</p>
+<p>（4）例如我们执行select name,sum(number) from test group by name，那么sum就对虚拟表3的number列的每个单元格进行sum操作，例如对name为aa的那一行的number列执行sum操作，即2+3，返回5，最后执行结果如下：</p>
+<p><img src="https://pic3.zhimg.com/80/v2-ab79c3f022084384d4beaa0e90f55466_720w.jpg" alt="img"></p>
+<p>（5）group by 多个字段该怎么理解呢：如group by name,number，我们可以把name和number 看成一个<strong>整体字段</strong>，以他们整体来进行分组的。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SQL</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/11/11/SQL%E4%B9%8Bgroup-by/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-java中的栈" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/11/java%E4%B8%AD%E7%9A%84%E6%A0%88/">java中的栈</a>
+    </h1>
+  
+
+        
+        <a href="/2021/11/11/java%E4%B8%AD%E7%9A%84%E6%A0%88/" class="archive-article-date">
+  	<time datetime="2021-11-11T11:34:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="使用Stack类实现"><a href="#使用Stack类实现" class="headerlink" title="使用Stack类实现"></a>使用Stack类实现</h2><p>这个类官方不建议使用</p>
+<blockquote>
+<p>The <code>Stack</code> class represents a last-in-first-out (LIFO) stack of objects. It extends class <code>Vector</code> with five operations that allow a vector to be treated as a stack. The usual <code>push</code> and <code>pop</code> operations are provided, as well as a method to <code>peek</code> at the top item on the stack, a method to test for whether the stack is <code>empty</code>, and a method to <code>search</code> the stack for an item and discover how far it is from the top.</p>
+<p>When a stack is first created, it contains no items.</p>
+<p>A more complete and consistent set of LIFO stack operations is provided by the <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/Deque.html"><code>Deque</code></a> interface and its implementations, which should be used in preference to this class. For example:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Deque&lt;Integer&gt; stack = new ArrayDeque&lt;Integer&gt;();</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<p>定义可以使用简单的<code>Stack&lt;Integer&gt; stack = new Stack&lt;&gt;()</code>来定义其中包含简单的几个操作比如 <code>push</code>，<code>pop</code>, <code>peek</code>等，功能很简单，官方建议使用<code>Deque</code>来作为LIFO栈。</p>
+<h2 id="使用Deque实现"><a href="#使用Deque实现" class="headerlink" title="使用Deque实现"></a>使用Deque实现</h2><p>这个类可以作为队列以及栈的实现来使用，对应的都有相应的方法</p>
+<p>使用这种方式实现的时候可以使用前面stack中的同名方法实现操作，Deque是一个接口在实现的时候，需要可以指定的实现类有：</p>
+<p><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayDeque.html">ArrayDeque</a>, <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ConcurrentLinkedDeque.html">ConcurrentLinkedDeque</a>, <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/LinkedBlockingDeque.html">LinkedBlockingDeque</a>, <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html">LinkedList</a></p>
+<p>**LinkedList内部实现是使用的一个双链表 **</p>
+<blockquote>
+<p>A linear collection that supports element insertion and removal at both ends. The name <em>deque</em> is short for “double ended queue” and is usually pronounced “deck”. Most <code>Deque</code> implementations place no fixed limits on the number of elements they may contain, but this interface supports capacity-restricted deques as well as those with no fixed size limit.</p>
+<p>This interface defines methods to access the elements at both ends of the deque. Methods are provided to insert, remove, and examine the element. Each of these methods exists in two forms: one throws an exception if the operation fails, the other returns a special value (either <code>null</code> or <code>false</code>, depending on the operation). The latter form of the insert operation is designed specifically for use with capacity-restricted <code>Deque</code> implementations; in most implementations, insert operations cannot fail.</p>
+<p>The twelve methods described above are summarized in the following table:</p>
 <table>
 <thead>
 <tr>
-<th align="center">格式</th>
-<th align="center">含义</th>
-<th align="center">举例</th>
+<th></th>
+<th><strong>First Element (Head)</strong></th>
+<th><strong>Last Element (Tail)</strong></th>
+<th></th>
+<th></th>
 </tr>
 </thead>
 <tbody><tr>
-<td align="center">yyyy</td>
-<td align="center">年</td>
-<td align="center">2019</td>
+<td></td>
+<td><em>Throws exception</em></td>
+<td><em>Special value</em></td>
+<td><em>Throws exception</em></td>
+<td><em>Special value</em></td>
 </tr>
 <tr>
-<td align="center">MM</td>
-<td align="center">月</td>
-<td align="center">02</td>
+<td><strong>Insert</strong></td>
+<td><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/Deque.html#addFirst-E-"><code>addFirst(e)</code></a></td>
+<td><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/Deque.html#offerFirst-E-"><code>offerFirst(e)</code></a></td>
+<td><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/Deque.html#addLast-E-"><code>addLast(e)</code></a></td>
+<td><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/Deque.html#offerLast-E-"><code>offerLast(e)</code></a></td>
 </tr>
 <tr>
-<td align="center">dd</td>
-<td align="center">日</td>
-<td align="center">18</td>
+<td><strong>Remove</strong></td>
+<td><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/Deque.html#removeFirst--"><code>removeFirst()</code></a></td>
+<td><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/Deque.html#pollFirst--"><code>pollFirst()</code></a></td>
+<td><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/Deque.html#removeLast--"><code>removeLast()</code></a></td>
+<td><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/Deque.html#pollLast--"><code>pollLast()</code></a></td>
 </tr>
 <tr>
-<td align="center">HH</td>
-<td align="center">小时(24)</td>
-<td align="center">14</td>
-</tr>
-<tr>
-<td align="center">mm</td>
-<td align="center">分钟</td>
-<td align="center">53</td>
-</tr>
-<tr>
-<td align="center">ss</td>
-<td align="center">秒</td>
-<td align="center">52</td>
-</tr>
-<tr>
-<td align="center">SSS</td>
-<td align="center">毫秒</td>
-<td align="center">625</td>
+<td><strong>Examine</strong></td>
+<td><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/Deque.html#getFirst--"><code>getFirst()</code></a></td>
+<td><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/Deque.html#peekFirst--"><code>peekFirst()</code></a></td>
+<td><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/Deque.html#getLast--"><code>getLast()</code></a></td>
+<td><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/Deque.html#peekLast--"><code>peekLast()</code></a></td>
 </tr>
 </tbody></table>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.text.SimpleDateFormat;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SimpleDateFormatDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        Date currentTime = <span class="keyword">new</span> Date();</span><br><span class="line"></span><br><span class="line">        System.out.println(currentTime);    <span class="comment">// Mon Feb 18 13:53:50 CST 2019</span></span><br><span class="line"></span><br><span class="line">        SimpleDateFormat simpleDateFormat1 = <span class="keyword">new</span> SimpleDateFormat(<span class="string">&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;</span>);</span><br><span class="line"></span><br><span class="line">        SimpleDateFormat simpleDateFormat2 = <span class="keyword">new</span> SimpleDateFormat(<span class="string">&quot;yyyy-MM-dd&quot;</span>);</span><br><span class="line"></span><br><span class="line">        SimpleDateFormat simpleDateFormat3 = <span class="keyword">new</span> SimpleDateFormat(<span class="string">&quot;yyyy/MM/dd&quot;</span>);</span><br><span class="line"></span><br><span class="line">        System.out.println(simpleDateFormat1.format(currentTime));  <span class="comment">// 输出2019-02-18 13:53:50.629</span></span><br><span class="line"></span><br><span class="line">        System.out.println(simpleDateFormat2.format(currentTime));  <span class="comment">// 输出2019-02-18</span></span><br><span class="line"></span><br><span class="line">        System.out.println(simpleDateFormat3.format(currentTime));  <span class="comment">// 输出2019/02/18</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="从String格式化到Date"><a href="#从String格式化到Date" class="headerlink" title="从String格式化到Date"></a>从String格式化到Date</h2><p>在实际开发过程中，我们经常需要将字符串转换为日期类型，以进行后续操作，此时可以使用parse()方法，但需要注意：如果字符串与指定的格式不匹配，会报java.text.ParseException异常</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.text.ParseException;</span><br><span class="line"><span class="keyword">import</span> java.text.SimpleDateFormat;</span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SimpleDateFormatDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            SimpleDateFormat simpleDateFormat1 = <span class="keyword">new</span> SimpleDateFormat(<span class="string">&quot;yyyy-MM-dd HH:mm&quot;</span>);</span><br><span class="line">            String strDate1 = <span class="string">&quot;2019-02-18 13:58&quot;</span>;</span><br><span class="line">            String strDate2 = <span class="string">&quot;2019-02-18&quot;</span>;</span><br><span class="line">            Date date1 = simpleDateFormat1.parse(strDate1);</span><br><span class="line">            System.out.println(date1);</span><br><span class="line">            Date date2 = simpleDateFormat1.parse(strDate2);</span><br><span class="line">            System.out.println(date2);</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (ParseException e) &#123;</span><br><span class="line"></span><br><span class="line">            e.printStackTrace();</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<p>This interface extends the <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/Queue.html"><code>Queue</code></a> interface. When a deque is used as a queue, FIFO (First-In-First-Out) behavior results. Elements are added at the end of the deque and removed from the beginning. The methods inherited from the <code>Queue</code> interface are precisely equivalent to <code>Deque</code> methods as indicated in the following table:</p>
+<table>
+<thead>
+<tr>
+<th><strong><code>Queue</code> Method</strong></th>
+<th><strong>Equivalent <code>Deque</code> Method</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/Queue.html#add-E-"><code>add(e)</code></a></td>
+<td><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/Deque.html#addLast-E-"><code>addLast(e)</code></a></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/Queue.html#offer-E-"><code>offer(e)</code></a></td>
+<td><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/Deque.html#offerLast-E-"><code>offerLast(e)</code></a></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/Queue.html#remove--"><code>remove()</code></a></td>
+<td><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/Deque.html#removeFirst--"><code>removeFirst()</code></a></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/Queue.html#poll--"><code>poll()</code></a></td>
+<td><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/Deque.html#pollFirst--"><code>pollFirst()</code></a></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/Queue.html#element--"><code>element()</code></a></td>
+<td><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/Deque.html#getFirst--"><code>getFirst()</code></a></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/Queue.html#peek--"><code>peek()</code></a></td>
+<td><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/Deque.html#peek--"><code>peekFirst()</code></a></td>
+</tr>
+</tbody></table>
+<p>Deques can also be used as LIFO (Last-In-First-Out) stacks. This interface should be used in preference to the legacy <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/Stack.html"><code>Stack</code></a> class. When a deque is used as a stack, elements are pushed and popped from the beginning of the deque. Stack methods are precisely equivalent to <code>Deque</code> methods as indicated in the table below:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Stack Method</strong></th>
+<th><strong>Equivalent <code>Deque</code> Method</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/Deque.html#push-E-"><code>push(e)</code></a></td>
+<td><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/Deque.html#addFirst-E-"><code>addFirst(e)</code></a></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/Deque.html#pop--"><code>pop()</code></a></td>
+<td><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/Deque.html#removeFirst--"><code>removeFirst()</code></a></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/Deque.html#peek--"><code>peek()</code></a></td>
+<td><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/Deque.html#peekFirst--"><code>peekFirst()</code></a></td>
+</tr>
+</tbody></table>
+<p>Note that the <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/Deque.html#peek--"><code>peek</code></a> method works equally well when a deque is used as a queue or a stack; in either case, elements are drawn from the beginning of the deque.</p>
+<p>This interface provides two methods to remove interior elements, <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/Deque.html#removeFirstOccurrence-java.lang.Object-"><code>removeFirstOccurrence</code></a> and <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/Deque.html#removeLastOccurrence-java.lang.Object-"><code>removeLastOccurrence</code></a>.</p>
+<p>Unlike the <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html"><code>List</code></a> interface, this interface does not provide support for indexed access to elements.</p>
+<p>While <code>Deque</code> implementations are not strictly required to prohibit the insertion of null elements, they are strongly encouraged to do so. Users of any <code>Deque</code> implementations that do allow null elements are strongly encouraged <em>not</em> to take advantage of the ability to insert nulls. This is so because <code>null</code> is used as a special return value by various methods to indicated that the deque is empty.</p>
+<p><code>Deque</code> implementations generally do not define element-based versions of the <code>equals</code> and <code>hashCode</code> methods, but instead inherit the identity-based versions from class <code>Object</code>.</p>
+<p>This interface is a member of the <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/technotes/guides/collections/index.html">Java Collections Framework</a>.</p>
+</blockquote>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>创建一个栈可以使用的几种方式：</p>
+<ul>
+<li><code>Stack&lt;Integer&gt; stack = new Stack&lt;Integer&gt;()</code></li>
+<li><code>Deque&lt;Integer&gt; stack = new ArrayDeque&lt;Integer&gt;()</code></li>
+<li><code>Deque&lt;Integer&gt; stack = new LinkedList&lt;Integer&gt;()</code></li>
+</ul>
+<p>在使用这几种实现方式对栈进行操作的时候可以使用同样的方法<code>pop</code>、<code>peek</code>、<code>push</code></p>
 
       
 
@@ -234,7 +977,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java, 日期格式化</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java基础</a>
         		</li>
       		
 		</ul>
@@ -244,7 +987,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/10/18/Java%E4%B8%AD%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%B7%A5%E5%85%B7%E7%B1%BB-SimpleDateFormat/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/11/11/java%E4%B8%AD%E7%9A%84%E6%A0%88/">展开全文 >></a>
         </p>
       
 
@@ -274,28 +1017,47 @@
 
 
   
-    <article id="post-Fully-Convolutional-Image-Classification-on-Arbitrary-Sized-Image" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Java位运算" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/14/Fully-Convolutional-Image-Classification-on-Arbitrary-Sized-Image/">Fully Convolutional Image Classification on Arbitrary Sized Image</a>
+      <a class="article-title" href="/2021/11/11/Java%E4%BD%8D%E8%BF%90%E7%AE%97/">Java位运算</a>
     </h1>
   
 
         
-        <a href="/2021/10/14/Fully-Convolutional-Image-Classification-on-Arbitrary-Sized-Image/" class="archive-article-date">
-  	<time datetime="2021-10-14T08:45:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-14</time>
+        <a href="/2021/11/11/Java%E4%BD%8D%E8%BF%90%E7%AE%97/" class="archive-article-date">
+  	<time datetime="2021-11-11T09:12:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-11</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>FC网络和CONV网络的区别在于输入时前者关注的是全局的特征，后者关注局部的特征。但是他们本质上是相似的因为这两者都是在计算点积，所以两者是可以相互转换的。 例如，一个FC的输入是一个5*5*16的tensor，输出的尺寸是120。转换的时候就可以使用120个5*5*16的filter来卷积，卷积核的大小是等于整个图片的大小的padding=0，stride=1这样就可以像全连接一样根据全局的特征输出。</p>
-<p><a target="_blank" rel="noopener" href="https://learnopencv.com/fully-convolutional-image-classification-on-arbitrary-sized-image/">参考链接</a></p>
+        <p>在Java语言中，提供了7种位运算符，分别是按位与（&amp;）、按位或（|）、按位异或（^）、取反(<del>)、左移(&lt;&lt;)、带符号右移(&gt;&gt;)和无符号右移(&gt;&gt;&gt;)。这些运算符当中，仅有</del>是单目运算符，其他运算符均为双目运算符。在讲解这些运算符的使用之前，必须了解一个常识，那就是：<strong>位运算符是对long、int、short、byte和char这5种类型的数据进行运算的</strong>，我们不能对double、float和boolean进行位运算操作。本文主要介绍左移，带符号右移和无符号右移三种方法。</p>
+<h2 id="左移"><a href="#左移" class="headerlink" title="左移"></a>左移</h2><blockquote>
+<p>对于byte/short/int三种类型的数据，Java语言最多支持31位的位移运算，对于long类型的数据而言，最多支持63位的位移运算。对于int来说对把左移的位数对32取余数</p>
+</blockquote>
+<p>左移运算符的写法是”&lt;&lt;“，看上去向两个向左的箭头，表示要把二进制数据在内存空间中向左边移动。使用左移运算符时，把想进行位移操作的操作数放最左面，之后写上左移运算符，在左移运算符的右边写上移动的位数。例如：5&lt;&lt;2就表示对数字5进行左移2位的操作。下图展示了进行左移操作之后，二进制串在内存中是怎样变化的：</p>
+<p><img src="https://pic1.zhimg.com/80/v2-b1d19a91b4a0239d86d39ec75739dd50_720w.jpg" alt="img"></p>
+<p>可以看到这个二进制串在内存中整体向左移动了两位，那么最左边的两位就跑到内存单元的外面去了，这两位数字将会被舍弃，右边空出的两位用0补齐。</p>
+<p>左移运算有乘以2的N次方的效果。一个数向左移动1位，就相当于乘以2的1次方，移动两位就相当于乘以2的2次方，也就是乘以4。位移操作在实际运算时远远快于乘法操作，所以在某些对运算速度要求非常高的场合，可以考虑用左移代替乘以2的N次方的乘法操作。但是需要提醒大家注意三个细节：</p>
+<p>首先：位移操作同取反操作一样，并不能改变变量本身的值，所能改变的仅是存储在操作数栈中那个数据的值,不理解这句话意思的小伙伴看下图：</p>
+<p><img src="https://pic1.zhimg.com/80/v2-4755d4862d514cf52f2aeda78d40ca30_720w.jpg" alt="img"></p>
+<p>其次：当位移的位数很多时，导致最左边的符号位发生变化，就不再具有乘以2的N次方的效果了。比如十进制的5转换为补码形式是：前面29个0最后3位是101，如果移动29位，那么最前面的符号位就变成了1，此时运算的结果就成为了一个负数，不再是5乘以2的29次方的乘法结果。</p>
+<h2 id="带符号右移"><a href="#带符号右移" class="headerlink" title="带符号右移"></a>带符号右移</h2><p>右移运算分为两种，分别是带符号右移和无符号右移。首先我们来说说带符号右移运算符。带符号右移运算符的写法是”&gt;&gt;“，与左移运算符的方向恰好相反。所谓带符号右移就是指当二进制串向右边移动以后，左边空出的位用”符号位上的数字”填充，说的更直白一点，如果是正数，二进制串右移的时候用0来填充左边的空位，而对于负数而言，右移的时候用1来填充左边的空位，如下图：</p>
+<p><img src="https://pic1.zhimg.com/80/v2-6e5c9939f3fca00675de5c1e3f1bf55c_720w.jpg" alt="img"></p>
+<p>从图上可以清楚的看到带符号右移操作在二进制串移动之后左边空位是怎样被填充的。之前强调过，左移N位的操作具有乘以2的N次方的效果，其实带符号右移也具有”类似”除以2的N次方的效果。请注意，这里说的是“类似”除以2的N次方的效果，为什么要加上“类似”两个字呢？就是因为对于正数而言，带符号右移之后产生的数字确实等于除以2的N次方，比如说我们把N的值设为3，对于正15，带符号右移3位的结果是1，这个结果与“15除以2的3次方”的结果是相同的。</p>
+<p>但是对于负数而言，带符号右移的效果分为两种情况，我们分别来讨论。</p>
+<p>如果这个负数是“2的N次方”的整数倍，那么带符号右移N位的效果也等于除以2的N次方。举个例子：我们还是把N的值设为3，如果对于“-16”来说，它是“2的3次方”的整数倍，那么带符号右移3位的结果是-2，这个结果相当于“-16除以2的3次方”。</p>
+<p>而如果这个负数不是“2的N次方”的整数倍，那么右移N位之后，是在除以2的N次方的结果之上还要减去1。比如，对于-15来说，它不是“2的3次方”的整数倍，那么带符号右移3位的结果是-2，这个运算结果其实就是“-15被2的3次方整除再减去1”。小伙伴们也可以用其他负整数来验证一下这个结论。因为并非每个负整数带符号右移的结果都等于除以“2的N次方”，所以我们才在文中添加了“类似”这两个字。==有问题？==</p>
+<p>带符号右移的操作可以保证移动之前和移动之后数字的正负属性不变，原来是正数，不管移动多少位，移动之后还是正数，原来是负数，移动之后还是负数。另外，我们还可以继续深挖一下这个特性，从而得到一个结论：<strong>对于任何一个byte、short或者int类型的数据而言，带符号右移31位(或更多位)之后，得到的必然是0或者是-1。对于long类型的数据而言，带符号右移63位(或更多位)之后，得到的也必然是0或者是-1。</strong>能够得出这个结论的依据也很简单，就是因为对于byte、short和int类型的变量而言，如果是正数，带符号右移31位之后产生的二进制串必然全部是0，转换成对应的十进制数就是0；而对于负数而言，带符号右移31位之后产生的二进制串必然全部是1，转换成十进制数就是-1。对于long类型的数据，带符号右移63位也具有相同效果。</p>
+<h2 id="无符号右移"><a href="#无符号右移" class="headerlink" title="无符号右移"></a>无符号右移</h2><p>前文已说过：右移运算分为两种，分别是带符号右移和无符号右移。现在再来讲解无符号右移。无符号右移运算符的写法是”&gt;&gt;&gt;”，比带符号右移多了一个”&gt;”。带符号右移的运算规则与无符号右移的运算规则差别就在于：无符号右移在二进制串移动之后，空位由0来补充，与符号位是0还是1毫无关系，如下图：</p>
+<p><img src="https://pic2.zhimg.com/80/v2-cee83a4e2d9833b506eed5a847b8b2f5_720w.jpg" alt="img"></p>
+<p>以上图片展示了无符号右移的运算规则。对于正数而言，无符号右移和带符号右移没有什么区别，而对于负数而言，经过无符号右移会产生一个正数，因为最左边的符号位被0填充了。</p>
 
       
 
@@ -309,7 +1071,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CNN</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Java位运算</a>
         		</li>
       		
 		</ul>
@@ -319,7 +1081,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/10/14/Fully-Convolutional-Image-Classification-on-Arbitrary-Sized-Image/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/11/11/Java%E4%BD%8D%E8%BF%90%E7%AE%97/">展开全文 >></a>
         </p>
       
 
@@ -349,6 +1111,92 @@
 
 
   
+    <article id="post-二分查找总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/11/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E6%80%BB%E7%BB%93/">二分查找总结</a>
+    </h1>
+  
+
+        
+        <a href="/2021/11/11/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E6%80%BB%E7%BB%93/" class="archive-article-date">
+  	<time datetime="2021-11-11T02:34:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>二分查找容易模糊的地方是循环终止条件中要不要加上等号，mid是不是应该加上1等等，可以将所有的情况分成三种 <code>查找一个数</code>、<code>寻找左侧边界</code>、<code>寻找右侧边界</code></p>
+<h2 id="基本的二分查找——-查找一个数"><a href="#基本的二分查找——-查找一个数" class="headerlink" title="基本的二分查找——-查找一个数"></a>基本的二分查找——-查找一个数</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> left = <span class="number">0</span>; </span><br><span class="line">    <span class="keyword">int</span> right = nums.length - <span class="number">1</span>; <span class="comment">// 注意</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(left &lt;= right) &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = left + (right - left) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span>(nums[mid] == target)</span><br><span class="line">            <span class="keyword">return</span> mid; </span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &lt; target)</span><br><span class="line">            left = mid + <span class="number">1</span>; <span class="comment">// 注意</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &gt; target)</span><br><span class="line">            right = mid - <span class="number">1</span>; <span class="comment">// 注意</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="寻找左侧边界的二分搜索"><a href="#寻找左侧边界的二分搜索" class="headerlink" title="寻找左侧边界的二分搜索"></a>寻找左侧边界的二分搜索</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">left_bound</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> left = <span class="number">0</span>, right = nums.length - <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// 搜索区间为 [left, right]</span></span><br><span class="line">    <span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = left + (right - left) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (nums[mid] &lt; target) &#123;</span><br><span class="line">            <span class="comment">// 搜索区间变为 [mid+1, right]</span></span><br><span class="line">            left = mid + <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &gt; target) &#123;</span><br><span class="line">            <span class="comment">// 搜索区间变为 [left, mid-1]</span></span><br><span class="line">            right = mid - <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] == target) &#123;</span><br><span class="line">            <span class="comment">// 收缩右侧边界</span></span><br><span class="line">            right = mid - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 检查出界情况</span></span><br><span class="line">    <span class="keyword">if</span> (left &gt;= nums.length || nums[left] != target)</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> left;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="寻找右侧边界的二分查找"><a href="#寻找右侧边界的二分查找" class="headerlink" title="寻找右侧边界的二分查找"></a>寻找右侧边界的二分查找</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">right_bound</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> left = <span class="number">0</span>, right = nums.length - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = left + (right - left) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (nums[mid] &lt; target) &#123;</span><br><span class="line">            left = mid + <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &gt; target) &#123;</span><br><span class="line">            right = mid - <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] == target) &#123;</span><br><span class="line">            <span class="comment">// 这里改成收缩左侧边界即可</span></span><br><span class="line">            left = mid + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 这里改为检查 right 越界的情况，见下图</span></span><br><span class="line">    <span class="keyword">if</span> (right &lt; <span class="number">0</span> || nums[right] != target)</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> right;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/11/11/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E6%80%BB%E7%BB%93/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+    </nav>
   
 
 
@@ -468,6 +1316,50 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java, 日期格式化</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Java位运算</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">QA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">pytorch</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">泛型</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
             
             <div class="clearfix"></div>

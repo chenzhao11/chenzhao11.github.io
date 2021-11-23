@@ -6,15 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://chenzhao11.github.io">
-  <title>Archives: 2021/10 | nobodyZhao</title>
+  <title>TreeMap与红黑树 | nobodyZhao</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="nobodyZhao">
-<meta property="og:url" content="https://chenzhao11.github.io/archives/2021/10/index.html">
+  <meta name="description" content="4.1 TreeMap在Map集合框架中，除了HashMap以外，TreeMap也是我们工作中常用到的集合对象之一。 与HashMap相比，TreeMap是一个能比较元素大小的Map集合，会对传入的key进行了大小排序。其中，可以使用元素的自然顺序，也可以使用集合中自定义的比较器来进行排序； 不同于HashMap的哈希映射，TreeMap底层实现了树形结构，至于具体形态，你可以简单的理解为一颗倒过">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TreeMap与红黑树">
+<meta property="og:url" content="https://chenzhao11.github.io/2021/11/18/TreeMap%E4%B8%8E%E7%BA%A2%E9%BB%91%E6%A0%91/index.html">
 <meta property="og:site_name" content="nobodyZhao">
+<meta property="og:description" content="4.1 TreeMap在Map集合框架中，除了HashMap以外，TreeMap也是我们工作中常用到的集合对象之一。 与HashMap相比，TreeMap是一个能比较元素大小的Map集合，会对传入的key进行了大小排序。其中，可以使用元素的自然顺序，也可以使用集合中自定义的比较器来进行排序； 不同于HashMap的哈希映射，TreeMap底层实现了树形结构，至于具体形态，你可以简单的理解为一颗倒过">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5621908-9e7544ea7dd5670c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/486/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5621908-b574ac50e5200807.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/221/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4717565-c361256ed1123010.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1200/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4717565-739b743a160bd7dd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/624/format/webp">
+<meta property="article:published_time" content="2021-11-18T02:39:30.000Z">
+<meta property="article:modified_time" content="2021-11-18T03:19:05.505Z">
 <meta property="article:author" content="Zhao Chen">
+<meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/5621908-9e7544ea7dd5670c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/486/format/webp">
   
     <link rel="alternative" href="/atom.xml" title="nobodyZhao" type="application/atom+xml">
   
@@ -144,174 +154,260 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-TreeMap与红黑树" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      TreeMap与红黑树
+    </h1>
+  
+
+        
+        <a href="/2021/11/18/TreeMap%E4%B8%8E%E7%BA%A2%E9%BB%91%E6%A0%91/" class="archive-article-date">
+  	<time datetime="2021-11-18T02:39:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-18</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="4-1-TreeMap"><a href="#4-1-TreeMap" class="headerlink" title="4.1 TreeMap"></a>4.1 TreeMap</h3><p>在Map集合框架中，除了HashMap以外，TreeMap也是我们工作中常用到的集合对象之一。</p>
+<p>与HashMap相比，TreeMap是一个能比较元素大小的Map集合，会对传入的key进行了大小排序。其中，可以使用元素的自然顺序，也可以使用集合中自定义的比较器来进行排序；</p>
+<p>不同于HashMap的哈希映射，TreeMap底层实现了树形结构，至于具体形态，你可以简单的理解为一颗倒过来的树—<strong>根在上–叶在下</strong>。如果用计算机术语来说的话，TreeMap实现了红黑树的结构，形成了一颗二叉树。</p>
+<p>至于什么是二叉树，什么是红黑树，我们后面再谈，你现在只需要记住它是一颗倒过来的树，就OK了。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5621908-9e7544ea7dd5670c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/486/format/webp" alt="img"></p>
+<p>TreeMap继承于AbstractMap，实现了Map, Cloneable, NavigableMap, Serializable接口。</p>
+<p>(1)TreeMap 继承于AbstractMap，而AbstractMap实现了Map接口，并实现了Map接口中定义的方法，减少了其子类继承的复杂度；</p>
+<p>(2)TreeMap 实现了Map接口，成为Map框架中的一员，可以包含着key–value形式的元素；</p>
+<p>(3)TreeMap 实现了NavigableMap接口，意味着拥有了更强的元素搜索能力；</p>
+<p>(4)TreeMap 实现了Cloneable接口，实现了clone()方法，可以被克隆；</p>
+<p>(5)TreeMap 实现了Java.io.Serializable接口，支持序列化操作，可通过Hessian协议进行传输；</p>
+<p>对于Cloneable, Serializable来说，我们再熟悉不过，基本上Java集合框架中的每一个类都会实现这2个接口，而NavigableMap接口是干什么的，它定义了什么样的功能？接下来，我们就通过NavigableMap的源码来看下！</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5621908-b574ac50e5200807.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/221/format/webp" alt="img"></p>
+<p>根据上面的截图，我们首先介绍下NavigableMap体系中的SortedMap接口：</p>
+<p>对于SortedMap来说，该类是TreeMap体系中的父接口，也是区别于HashMap体系最关键的一个接口。</p>
+<p>主要原因就是SortedMap接口中定义的第一个方法—Comparator&lt;? super K&gt; comparator()；</p>
+<p>该方法决定了TreeMap体系的走向，有了比较器，就可以对插入的元素进行排序了；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">SortedMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">Map</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//返回元素比较器。如果是自然顺序，则返回null；</span></span><br><span class="line">    Comparator&lt;? <span class="keyword">super</span> K&gt; comparator();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//返回从fromKey到toKey的集合：含头不含尾</span></span><br><span class="line">    java.util.<span class="function">SortedMap&lt;K,V&gt; <span class="title">subMap</span><span class="params">(K fromKey, K toKey)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回从头到toKey的集合：不包含toKey</span></span><br><span class="line">    java.util.<span class="function">SortedMap&lt;K,V&gt; <span class="title">headMap</span><span class="params">(K toKey)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回从fromKey到结尾的集合：包含fromKey</span></span><br><span class="line">    java.util.<span class="function">SortedMap&lt;K,V&gt; <span class="title">tailMap</span><span class="params">(K fromKey)</span></span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//返回集合中的第一个元素：</span></span><br><span class="line">    <span class="function">K <span class="title">firstKey</span><span class="params">()</span></span>;</span><br><span class="line">   </span><br><span class="line">    <span class="comment">//返回集合中的最后一个元素：</span></span><br><span class="line">    <span class="function">K <span class="title">lastKey</span><span class="params">()</span></span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//返回集合中所有key的集合：</span></span><br><span class="line">    <span class="function">Set&lt;K&gt; <span class="title">keySet</span><span class="params">()</span></span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//返回集合中所有value的集合：</span></span><br><span class="line">    <span class="function">Collection&lt;V&gt; <span class="title">values</span><span class="params">()</span></span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//返回集合中的元素映射：</span></span><br><span class="line">    Set&lt;Map.Entry&lt;K, V&gt;&gt; entrySet();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面介绍了SortedMap接口，而NavigableMap接口又是对SortedMap进一步的扩展：主要增加了对集合内元素的搜索获取操作，例如：返回集合中某一区间内的元素、返回小于大于某一值的元素等类似操作。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">NavigableMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">SortedMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回小于key的第一个元素：</span></span><br><span class="line">    Map.<span class="function">Entry&lt;K,V&gt; <span class="title">lowerEntry</span><span class="params">(K key)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回小于key的第一个键：</span></span><br><span class="line">    <span class="function">K <span class="title">lowerKey</span><span class="params">(K key)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回小于等于key的第一个元素：</span></span><br><span class="line">    Map.<span class="function">Entry&lt;K,V&gt; <span class="title">floorEntry</span><span class="params">(K key)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回小于等于key的第一个键：</span></span><br><span class="line">    <span class="function">K <span class="title">floorKey</span><span class="params">(K key)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回大于或者等于key的第一个元素：</span></span><br><span class="line">    Map.<span class="function">Entry&lt;K,V&gt; <span class="title">ceilingEntry</span><span class="params">(K key)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回大于或者等于key的第一个键：</span></span><br><span class="line">    <span class="function">K <span class="title">ceilingKey</span><span class="params">(K key)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回大于key的第一个元素：</span></span><br><span class="line">    Map.<span class="function">Entry&lt;K,V&gt; <span class="title">higherEntry</span><span class="params">(K key)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回大于key的第一个键：</span></span><br><span class="line">    <span class="function">K <span class="title">higherKey</span><span class="params">(K key)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回集合中第一个元素：</span></span><br><span class="line">    Map.<span class="function">Entry&lt;K,V&gt; <span class="title">firstEntry</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回集合中最后一个元素：</span></span><br><span class="line">    Map.<span class="function">Entry&lt;K,V&gt; <span class="title">lastEntry</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回集合中第一个元素，并从集合中删除：</span></span><br><span class="line">    Map.<span class="function">Entry&lt;K,V&gt; <span class="title">pollFirstEntry</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回集合中最后一个元素，并从集合中删除：</span></span><br><span class="line">    Map.<span class="function">Entry&lt;K,V&gt; <span class="title">pollLastEntry</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回倒序的Map集合：</span></span><br><span class="line">    java.util.<span class="function">NavigableMap&lt;K,V&gt; <span class="title">descendingMap</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">NavigableSet&lt;K&gt; <span class="title">navigableKeySet</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回Map集合中倒序的Key组成的Set集合：</span></span><br><span class="line">    <span class="function">NavigableSet&lt;K&gt; <span class="title">descendingKeySet</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    java.util.<span class="function">NavigableMap&lt;K,V&gt; <span class="title">subMap</span><span class="params">(K fromKey, <span class="keyword">boolean</span> fromInclusive,</span></span></span><br><span class="line"><span class="params"><span class="function">                                       K toKey, <span class="keyword">boolean</span> toInclusive)</span></span>;</span><br><span class="line"></span><br><span class="line">    java.util.<span class="function">NavigableMap&lt;K,V&gt; <span class="title">headMap</span><span class="params">(K toKey, <span class="keyword">boolean</span> inclusive)</span></span>;</span><br><span class="line"></span><br><span class="line">    java.util.<span class="function">NavigableMap&lt;K,V&gt; <span class="title">tailMap</span><span class="params">(K fromKey, <span class="keyword">boolean</span> inclusive)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">SortedMap&lt;K,V&gt; <span class="title">subMap</span><span class="params">(K fromKey, K toKey)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">SortedMap&lt;K,V&gt; <span class="title">headMap</span><span class="params">(K toKey)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">SortedMap&lt;K,V&gt; <span class="title">tailMap</span><span class="params">(K fromKey)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其实，NavigableMap的目的很简单、很直接，就是增强了对集合内元素的搜索、获取的功能，当子类TreeMap实现时，自然获取以上的功能；</p>
+<p>TreeMap具有如下特点：</p>
+<ul>
+<li>不允许出现重复的key；</li>
+<li>可以插入null键，null值；</li>
+<li>可以对元素进行排序；</li>
+<li>无序集合（插入和遍历顺序不一致）；</li>
+</ul>
+<h3 id="4-2-TreeMap基本操作"><a href="#4-2-TreeMap基本操作" class="headerlink" title="4.2 TreeMap基本操作"></a>4.2 TreeMap基本操作</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">TreeMapTest</span> </span>&#123;</span><br><span class="line">    public <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="built_in">String</span>[] agrs)&#123;</span><br><span class="line">        <span class="comment">//创建TreeMap对象：</span></span><br><span class="line">        TreeMap&lt;<span class="built_in">String</span>,Integer&gt; treeMap = <span class="keyword">new</span> TreeMap&lt;<span class="built_in">String</span>,Integer&gt;();</span><br><span class="line">        System.out.println(<span class="string">&quot;初始化后,TreeMap元素个数为：&quot;</span> + treeMap.size());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//新增元素:</span></span><br><span class="line">        treeMap.put(<span class="string">&quot;hello&quot;</span>,<span class="number">1</span>);</span><br><span class="line">        treeMap.put(<span class="string">&quot;world&quot;</span>,<span class="number">2</span>);</span><br><span class="line">        treeMap.put(<span class="string">&quot;my&quot;</span>,<span class="number">3</span>);</span><br><span class="line">        treeMap.put(<span class="string">&quot;name&quot;</span>,<span class="number">4</span>);</span><br><span class="line">        treeMap.put(<span class="string">&quot;is&quot;</span>,<span class="number">5</span>);</span><br><span class="line">        treeMap.put(<span class="string">&quot;jiaboyan&quot;</span>,<span class="number">6</span>);</span><br><span class="line">        treeMap.put(<span class="string">&quot;i&quot;</span>,<span class="number">6</span>);</span><br><span class="line">        treeMap.put(<span class="string">&quot;am&quot;</span>,<span class="number">6</span>);</span><br><span class="line">        treeMap.put(<span class="string">&quot;a&quot;</span>,<span class="number">6</span>);</span><br><span class="line">        treeMap.put(<span class="string">&quot;developer&quot;</span>,<span class="number">6</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;添加元素后,TreeMap元素个数为：&quot;</span> + treeMap.size());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//遍历元素：</span></span><br><span class="line">        <span class="built_in">Set</span>&lt;<span class="built_in">Map</span>.Entry&lt;<span class="built_in">String</span>,Integer&gt;&gt; entrySet = treeMap.entrySet();</span><br><span class="line">        <span class="keyword">for</span>(<span class="built_in">Map</span>.Entry&lt;<span class="built_in">String</span>,Integer&gt; entry : entrySet)&#123;</span><br><span class="line">            <span class="built_in">String</span> key = entry.getKey();</span><br><span class="line">            Integer value = entry.getValue();</span><br><span class="line">            System.out.println(<span class="string">&quot;TreeMap元素的key:&quot;</span>+key+<span class="string">&quot;,value:&quot;</span>+value);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//获取所有的key：</span></span><br><span class="line">        <span class="built_in">Set</span>&lt;<span class="built_in">String</span>&gt; keySet = treeMap.keySet();</span><br><span class="line">        <span class="keyword">for</span>(<span class="built_in">String</span> strKey:keySet)&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;TreeMap集合中的key:&quot;</span>+strKey);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//获取所有的value:</span></span><br><span class="line">        Collection&lt;Integer&gt; valueList = treeMap.values();</span><br><span class="line">        <span class="keyword">for</span>(Integer intValue:valueList)&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;TreeMap集合中的value:&quot;</span> + intValue);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//获取元素：</span></span><br><span class="line">        Integer getValue = treeMap.<span class="keyword">get</span>(<span class="string">&quot;jiaboyan&quot;</span>);<span class="comment">//获取集合内元素key为&quot;jiaboyan&quot;的值</span></span><br><span class="line">        <span class="built_in">String</span> firstKey = treeMap.firstKey();<span class="comment">//获取集合内第一个元素</span></span><br><span class="line">        <span class="built_in">String</span> lastKey =treeMap.lastKey();<span class="comment">//获取集合内最后一个元素</span></span><br><span class="line">        <span class="built_in">String</span> lowerKey =treeMap.lowerKey(<span class="string">&quot;jiaboyan&quot;</span>);<span class="comment">//获取集合内的key小于&quot;jiaboyan&quot;的key</span></span><br><span class="line">        <span class="built_in">String</span> ceilingKey =treeMap.ceilingKey(<span class="string">&quot;jiaboyan&quot;</span>);<span class="comment">//获取集合内的key大于等于&quot;jiaboyan&quot;的key</span></span><br><span class="line">        SortedMap&lt;<span class="built_in">String</span>,Integer&gt; sortedMap =treeMap.subMap(<span class="string">&quot;a&quot;</span>,<span class="string">&quot;my&quot;</span>);<span class="comment">//获取集合的key从&quot;a&quot;到&quot;jiaboyan&quot;的元素</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//删除元素：</span></span><br><span class="line">        Integer removeValue = treeMap.remove(<span class="string">&quot;jiaboyan&quot;</span>);<span class="comment">//删除集合中key为&quot;jiaboyan&quot;的元素</span></span><br><span class="line">        treeMap.clear(); <span class="comment">//清空集合元素：</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//判断方法：</span></span><br><span class="line">        boolean isEmpty = treeMap.isEmpty();<span class="comment">//判断集合是否为空</span></span><br><span class="line">        boolean isContain = treeMap.containsKey(<span class="string">&quot;jiaboyan&quot;</span>);<span class="comment">//判断集合的key中是否包含&quot;jiaboyan&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-3-TreeMap排序"><a href="#4-3-TreeMap排序" class="headerlink" title="4.3 TreeMap排序"></a>4.3 TreeMap排序</h3><p>上一节，通过代码展示出TreeMap简单使用。而早在第一小节，笔者就说过TreeMap是一个可以对元素进行排序的集合，那么究竟怎么排序呢？</p>
+<p>（1）使用元素自然排序</p>
+<p>在使用自然顺序排序时候，需要区分两种情况：一种是Jdk定义的对象，一种是我们应用自己定义的对象；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SortedTest</span> <span class="keyword">implements</span> <span class="title">Comparable</span>&lt;<span class="title">SortedTest</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SortedTest</span><span class="params">(<span class="keyword">int</span> age)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//自定义对象，实现compareTo(T o)方法：</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(SortedTest sortedTest)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> num = <span class="keyword">this</span>.age - sortedTest.getAge();</span><br><span class="line">        <span class="comment">//为0时候，两者相同：</span></span><br><span class="line">        <span class="keyword">if</span>(num==<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//大于0时，传入的参数小：</span></span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(num&gt;<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="comment">//小于0时，传入的参数大：</span></span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TreeMapTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] agrs)</span></span>&#123;</span><br><span class="line">        <span class="comment">//自然顺序比较</span></span><br><span class="line">        naturalSort();</span><br><span class="line">    &#125;</span><br><span class="line">     <span class="comment">//自然排序顺序：</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">naturalSort</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//第一种情况：Integer对象</span></span><br><span class="line">        TreeMap&lt;Integer,String&gt; treeMapFirst = <span class="keyword">new</span> TreeMap&lt;Integer, String&gt;();</span><br><span class="line">        treeMapFirst.put(<span class="number">1</span>,<span class="string">&quot;jiaboyan&quot;</span>);</span><br><span class="line">        treeMapFirst.put(<span class="number">6</span>,<span class="string">&quot;jiaboyan&quot;</span>);</span><br><span class="line">        treeMapFirst.put(<span class="number">3</span>,<span class="string">&quot;jiaboyan&quot;</span>);</span><br><span class="line">        treeMapFirst.put(<span class="number">10</span>,<span class="string">&quot;jiaboyan&quot;</span>);</span><br><span class="line">        treeMapFirst.put(<span class="number">7</span>,<span class="string">&quot;jiaboyan&quot;</span>);</span><br><span class="line">        treeMapFirst.put(<span class="number">13</span>,<span class="string">&quot;jiaboyan&quot;</span>);</span><br><span class="line">        System.out.println(treeMapFirst.toString());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//第二种情况:SortedTest对象</span></span><br><span class="line">        TreeMap&lt;SortedTest,String&gt; treeMapSecond = <span class="keyword">new</span> TreeMap&lt;SortedTest, String&gt;();</span><br><span class="line">        treeMapSecond.put(<span class="keyword">new</span> SortedTest(<span class="number">10</span>),<span class="string">&quot;jiaboyan&quot;</span>);</span><br><span class="line">        treeMapSecond.put(<span class="keyword">new</span> SortedTest(<span class="number">1</span>),<span class="string">&quot;jiaboyan&quot;</span>);</span><br><span class="line">        treeMapSecond.put(<span class="keyword">new</span> SortedTest(<span class="number">13</span>),<span class="string">&quot;jiaboyan&quot;</span>);</span><br><span class="line">        treeMapSecond.put(<span class="keyword">new</span> SortedTest(<span class="number">4</span>),<span class="string">&quot;jiaboyan&quot;</span>);</span><br><span class="line">        treeMapSecond.put(<span class="keyword">new</span> SortedTest(<span class="number">0</span>),<span class="string">&quot;jiaboyan&quot;</span>);</span><br><span class="line">        treeMapSecond.put(<span class="keyword">new</span> SortedTest(<span class="number">9</span>),<span class="string">&quot;jiaboyan&quot;</span>);</span><br><span class="line">        System.out.println(treeMapSecond.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在自然顺序比较中，需要让被比较的元素实现Comparable接口，否则在向集合里添加元素时报：”java.lang.ClassCastException: com.jiaboyan.collection.map.SortedTest cannot be cast to java.lang.Comparable”异常；</p>
+<p>这是因为在调用put()方法时，会将传入的元素转化成Comparable类型对象，所以当你传入的元素没有实现Comparable接口时，就无法转换，遍会报错；</p>
+<p>（2）使用自定义比较器排序</p>
+<p>使用自定义比较器排序，需要在创建TreeMap对象时，将自定义比较器对象传入到TreeMap构造方法中；</p>
+<p>自定义比较器对象，需要实现Comparator接口，并实现比较方法compare(T o1,T o2)；</p>
+<p>值得一提的是，使用自定义比较器排序的话，被比较的对象无需再实现Comparable接口了；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SortedTest</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SortedTest</span><span class="params">(<span class="keyword">int</span> age)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SortedTestComparator</span> <span class="keyword">implements</span> <span class="title">Comparator</span>&lt;<span class="title">SortedTest</span>&gt; </span>&#123;</span><br><span class="line">    <span class="comment">//自定义比较器：实现compare(T o1,T o2)方法：</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(SortedTest sortedTest1, SortedTest sortedTest2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> num = sortedTest1.getAge() - sortedTest2.getAge();</span><br><span class="line">        <span class="keyword">if</span>(num==<span class="number">0</span>)&#123;<span class="comment">//为0时候，两者相同：</span></span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(num&gt;<span class="number">0</span>)&#123;<span class="comment">//大于0时，后面的参数小：</span></span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;<span class="comment">//小于0时，前面的参数小：</span></span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TreeMapTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] agrs)</span></span>&#123;</span><br><span class="line">        <span class="comment">//自定义顺序比较</span></span><br><span class="line">        customSort();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//自定义排序顺序:</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">customSort</span><span class="params">()</span></span>&#123;</span><br><span class="line">        TreeMap&lt;SortedTest,String&gt; treeMap = <span class="keyword">new</span> TreeMap&lt;SortedTest, String&gt;(<span class="keyword">new</span> SortedTestComparator());</span><br><span class="line">        treeMap.put(<span class="keyword">new</span> SortedTest(<span class="number">10</span>),<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">        treeMap.put(<span class="keyword">new</span> SortedTest(<span class="number">21</span>),<span class="string">&quot;my&quot;</span>);</span><br><span class="line">        treeMap.put(<span class="keyword">new</span> SortedTest(<span class="number">15</span>),<span class="string">&quot;name&quot;</span>);</span><br><span class="line">        treeMap.put(<span class="keyword">new</span> SortedTest(<span class="number">2</span>),<span class="string">&quot;is&quot;</span>);</span><br><span class="line">        treeMap.put(<span class="keyword">new</span> SortedTest(<span class="number">1</span>),<span class="string">&quot;jiaboyan&quot;</span>);</span><br><span class="line">        treeMap.put(<span class="keyword">new</span> SortedTest(<span class="number">7</span>),<span class="string">&quot;world&quot;</span>);</span><br><span class="line">        System.out.println(treeMap.toString());</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>作者：贾博岩<br>链接：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/2dcff3634326">https://www.jianshu.com/p/2dcff3634326</a><br>来源：简书<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<h2 id="红黑树、B-树、B树的理解"><a href="#红黑树、B-树、B树的理解" class="headerlink" title="红黑树、B+树、B树的理解"></a>红黑树、B+树、B树的理解</h2><p>二叉搜索树-&gt;AVL  平衡二叉树</p>
+<p>B树-&gt; b+树</p>
+<p>红黑树</p>
+<p>搜索树中每一个节点只是包含一个数据，在后三者中 是包含的一个范围区间，B+树相较于B树在叶节点中增加了指针 。红黑树是对B树的改良，B数在插入删除的时候的效率低于红黑树，所以有的在内存中使用的一般是红黑树，只要是用B树的都可以用红黑树实现同样的效果。</p>
+<p>写在前面，好像不同的教材对b树，b-树的定义不一样。我就不纠结这个到底是叫b-树还是b-树了。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4717565-c361256ed1123010.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1200/format/webp" alt="img"></p>
+<p>image.png</p>
+<p><strong>如图所示，区别有以下两点：</strong></p>
+<ol>
+<li>B+树中只有叶子节点会带有指向记录的指针，而B树则所有节点都带有，在内部节点出现的索引项不会再出现在叶子节点中。</li>
+<li>B+树中所有叶子节点都是通过指针连接在一起，而B树不会。</li>
+</ol>
+<p><strong>B+树的优点：</strong></p>
+<ol>
+<li><strong>非叶子节点不会带上指向记录的指针，这样，一个块中可以容纳更多的索引项，</strong>一是可以降低树的高度。二是一个内部节点可以定位更多的叶子节点。</li>
+<li>叶子节点之间通过指针来连接，范围扫描将十分简单，而对于B树来说，则需要在叶子节点和内部节点不停的往返移动。<strong>具体的来讲，如何想扫描一次所有数据，对于b+树来说，可以从因为他们的叶子结点是连在一起的，所以可以横向的遍历过去。而对于b-树来说，就这能中序遍历了。</strong></li>
+</ol>
+<p><strong>B树的优点：</strong><br> 对于在内部节点的数据，可直接得到，不必根据叶子节点来定位。</p>
+<p><strong>B树长什么样子？</strong></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4717565-739b743a160bd7dd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/624/format/webp" alt="img"></p>
+<h5 id="红黑树和B树应用场景有何不同？"><a href="#红黑树和B树应用场景有何不同？" class="headerlink" title="红黑树和B树应用场景有何不同？"></a>红黑树和B树应用场景有何不同？</h5><h6 id="为什么要设计红黑树？"><a href="#为什么要设计红黑树？" class="headerlink" title="为什么要设计红黑树？"></a>为什么要设计红黑树？</h6><p>先说一下红黑树，红黑树有一个比较复杂的规则，红的结点balala怎么样，黑的结点balalal怎么样。大一大二学这些的时候，傻呵呵的想背课文一样背下来，当也不知道为什么要设计成这样。换一句话说，为什么平衡树和红黑树的区别是什么？为什么有了平衡树还要设计出来红黑树？</p>
+<p>红黑树的规则：<br> 1）每个结点要么是红的，要么是黑的。<br> 2）根结点是黑的。<br> 3）每个叶结点（叶结点即指树尾端NIL指针或NULL结点）是黑的。<br> 4）如果一个结点是红的，那么它的俩个儿子都是黑的。<br> 5）对于任一结点而言，其到叶结点树尾端NIL指针的每一条路径都包含相同数目的黑结点。</p>
+<p>现在想想，我的理解是<strong>平衡树（AVL）</strong>更平衡，结构上更加直观，时间效能针对读取而言更高，<strong>但是维护起来比较麻烦！！！</strong>（插入和删除之后，都需要rebalance）。但是，红黑树通过它规则的设定，确保了插入和删除的最坏的时间复杂度是O(log N) 。</p>
+<p>设计红黑树的目的，<strong>就是解决平衡树的维护起来比较麻烦的问题，红黑树，读取略逊于AVL，维护强于AVL，每次插入和删除的平均旋转次数应该是远小于平衡树。</strong></p>
+<p>小结一下：</p>
+<p>能用平衡树的地方，就可以用红黑树。用红黑树之后，读取略逊于AVL，维护强于AVL。</p>
+<h6 id="红黑树-和-b-树的用途有什么区别？"><a href="#红黑树-和-b-树的用途有什么区别？" class="headerlink" title="红黑树 和 b+树的用途有什么区别？"></a>红黑树 和 b+树的用途有什么区别？</h6><ol>
+<li>红黑树多用在内部排序，即全放在内存中的，STL的map和set的内部实现就是红黑树。</li>
+<li>B+树多用于外存上时，B+也被成为一个磁盘友好的数据结构。</li>
+</ol>
+<p><strong>为什么b+磁盘友好？</strong></p>
+<ol>
+<li>磁盘读写代价更低<br> 树的非叶子结点里面没有数据，这样索引比较小，可以放在一个blcok（或者尽可能少的blcok）里面。避免了树形结构不断的向下查找，然后磁盘不停的寻道，读数据。这样的设计，可以降低io的次数。</li>
+<li>查询效率更加稳定<br> 非终结点并不是最终指向文件内容的结点，而只是叶子结点中关键字的索引。所以任何关键字的查找必须走一条从根结点到叶子结点的路。所有关键字查询的路径长度相同，导致每一个数据的查询效率相当。</li>
+<li>遍历所有的数据更方便<br> B+树只要遍历叶子节点就可以实现整棵树的遍历，而其他的树形结构 要中序遍历才可以访问所有的数据。</li>
+</ol>
+<p>作者：DayDayUpppppp<br>链接：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/86a1fd2d7406">https://www.jianshu.com/p/86a1fd2d7406</a><br>来源：简书<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/10/21/java%E6%B3%9B%E5%9E%8B/" class="archive-article-date">
-  	<time datetime="2021-10-21T10:29:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/10/21/java%E6%B3%9B%E5%9E%8B/">java泛型</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">泛型</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://chenzhao11.github.io/2021/11/18/TreeMap%E4%B8%8E%E7%BA%A2%E9%BB%91%E6%A0%91/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/10/18/Pytorch%E4%B8%AD%E7%9A%84%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/" class="archive-article-date">
-  	<time datetime="2021-10-18T06:15:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-18</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2021/11/23/%E9%93%BE%E8%A1%A8%E7%9A%84%E5%89%8D%E5%BA%8F%E4%B8%8E%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          链表的前序与后序遍历
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/11/18/PriorityQueue%E7%9B%B8%E5%85%B3/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">PriorityQueue相关</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/10/18/Pytorch%E4%B8%AD%E7%9A%84%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/">Pytorch中的损失函数</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">pytorch</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/10/18/Java%E4%B8%AD%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%B7%A5%E5%85%B7%E7%B1%BB-SimpleDateFormat/" class="archive-article-date">
-  	<time datetime="2021-10-18T04:52:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/10/18/Java%E4%B8%AD%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%B7%A5%E5%85%B7%E7%B1%BB-SimpleDateFormat/">Java中日期格式化工具类--SimpleDateFormat</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java, 日期格式化</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/10/14/Fully-Convolutional-Image-Classification-on-Arbitrary-Sized-Image/" class="archive-article-date">
-  	<time datetime="2021-10-14T08:45:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/10/14/Fully-Convolutional-Image-Classification-on-Arbitrary-Sized-Image/">Fully Convolutional Image Classification on Arbitrary Sized Image</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CNN</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -334,8 +430,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,

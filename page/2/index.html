@@ -6,11 +6,11 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://chenzhao11.github.io">
-  <title>Archives: 2021/10 | nobodyZhao</title>
+  <title>nobodyZhao</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
 <meta property="og:title" content="nobodyZhao">
-<meta property="og:url" content="https://chenzhao11.github.io/archives/2021/10/index.html">
+<meta property="og:url" content="https://chenzhao11.github.io/page/2/index.html">
 <meta property="og:site_name" content="nobodyZhao">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="Zhao Chen">
@@ -146,34 +146,174 @@
           <div id="js-content" class="content-ll">
             
   
-  
+    <article id="post-SQL中union与join" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/10/21/java%E6%B3%9B%E5%9E%8B/" class="archive-article-date">
-  	<time datetime="2021-10-21T10:29:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-21</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
     <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/10/21/java%E6%B3%9B%E5%9E%8B/">java泛型</a>
+      <a class="article-title" href="/2021/11/09/SQL%E4%B8%ADunion%E4%B8%8Ejoin/">SQL中union与join</a>
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2021/11/09/SQL%E4%B8%ADunion%E4%B8%8Ejoin/" class="archive-article-date">
+  	<time datetime="2021-11-09T12:14:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>union</p>
+<p>将两个表中的数据合并成一个表，可以选择将两个表中相同的行合并也可以不合并</p>
+<p>join</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/108582096">https://zhuanlan.zhihu.com/p/108582096</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/11/09/SQL%E4%B8%ADunion%E4%B8%8Ejoin/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-java泛型" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/21/java%E6%B3%9B%E5%9E%8B/">java泛型</a>
+    </h1>
+  
+
+        
+        <a href="/2021/10/21/java%E6%B3%9B%E5%9E%8B/" class="archive-article-date">
+  	<time datetime="2021-10-21T10:29:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>使用泛型程序设计编写的程序可以被很多不同类型的对象重用，在java集合类中充分体现了这种思想。</p>
+<p>没有泛型之前想要实现泛型类似的效果需要使用继承来实现，其中不指定具体的类型直接使用的是Object类型，这样做的缺点是：</p>
+<ul>
+<li>取出值的时候需要进行强制类型转换，因为内部使用的都是Object对象在写入的时候可能写入多种类型，在取出的时候也需要先进行强制类型转化为指定对象。在写入和取出的时候可能会有类型不匹配的情况导致出错。</li>
+<li>写入的时候没有错误检查，只要求时Object</li>
+</ul>
+<p><strong>使用泛型参数的好处：</strong></p>
+<ul>
+<li>安全性</li>
+<li>可读性</li>
+</ul>
+<h3 id="引入问题"><a href="#引入问题" class="headerlink" title="引入问题"></a>引入问题</h3><p>程序员可能想要将ArrayList<Manager>中的所有元素添加到ArrayList<Employee>中去。然而，反过来就不行了。如果只能允许前一个调用，而不能允许后一个调用呢？如何实现这种需求呢？</p>
+<h2 id="几种使用"><a href="#几种使用" class="headerlink" title="几种使用"></a>几种使用</h2><h3 id="泛型类"><a href="#泛型类" class="headerlink" title="泛型类"></a>泛型类</h3><img src="D:/MD%E6%96%87%E6%A1%A3/Photo/java%E6%B3%9B%E5%9E%8B.assets/image-20211021184744062.png" alt="image-20211021184744062" style="zoom: 50%;" />
+
+<h3 id="泛型方法"><a href="#泛型方法" class="headerlink" title="泛型方法"></a>泛型方法</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><img src="D:/MD%E6%96%87%E6%A1%A3/Photo/java%E6%B3%9B%E5%9E%8B.assets/image-20211021185546701.png" alt="image-20211021185546701" style="zoom:50%;" />
+
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><img src="D:/MD%E6%96%87%E6%A1%A3/Photo/java%E6%B3%9B%E5%9E%8B.assets/image-20211021185644576.png" alt="image-20211021185644576" style="zoom:50%;" />
+
+<h3 id="类型变量的限定"><a href="#类型变量的限定" class="headerlink" title="类型变量的限定"></a>类型变量的限定</h3><h4 id="问题引入"><a href="#问题引入" class="headerlink" title="问题引入"></a>问题引入</h4><img src="D:/MD%E6%96%87%E6%A1%A3/Photo/java%E6%B3%9B%E5%9E%8B.assets/image-20211021195528313.png" alt="image-20211021195528313" style="zoom:50%;" />
+
+<p>如上，比较的时候使用了compareTo方法，必须要确保类实现了<code>comparable</code>接口，这时候需要限定类型变量，具体的：</p>
+<p>传入的类应该是实现了Comparable接口的。</p>
+<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><img src="D:/MD%E6%96%87%E6%A1%A3/Photo/java%E6%B3%9B%E5%9E%8B.assets/image-20211021195804651.png" alt="image-20211021195804651" style="zoom:50%;" />
+
+<p>为什么实现的是comparable接口使用的却是<code>extends</code>而不是像类中使用implements？？</p>
+<p> 目的是表达子类的关系用extends相较于implements更加接近于子类的概念。T和绑定类可以是类也可以是接口。</p>
+<p><strong>一个类型变量或者通配符可以有多个限定</strong></p>
+<img src="D:/MD%E6%96%87%E6%A1%A3/Photo/java%E6%B3%9B%E5%9E%8B.assets/image-20211021201240539.png" alt="image-20211021201240539" style="zoom:50%;" />
+
+<p>因为java是单继承的所以限定中至多只能有一个类，如果用一个类作为限定的话它必须是限定列表中的第一个。</p>
+<h2 id="类型擦除"><a href="#类型擦除" class="headerlink" title="类型擦除"></a>类型擦除</h2><p>虚拟机中是没有泛型类型对象的，无论何时定义一个泛型类型，都自动提供了一个相应的原始类型，如果没有限定类型类型参数替换成Object，限定类型使用的是所有限定类型中的第一个，其他的一些类型限定是通过编译器的强制类型转换来实现的，所以说限定类型是类的时候需要把类放在第一位</p>
+<h3 id="泛型表达式与保持多态"><a href="#泛型表达式与保持多态" class="headerlink" title="泛型表达式与保持多态"></a>泛型表达式与保持多态</h3><p>==桥方法==</p>
+<h3 id="调用遗留代码"><a href="#调用遗留代码" class="headerlink" title="调用遗留代码"></a>调用遗留代码</h3><h2 id="泛型的局限性与约束"><a href="#泛型的局限性与约束" class="headerlink" title="泛型的局限性与约束"></a>泛型的局限性与约束</h2><ul>
+<li><p>不能使用基本类型实例化类型参数</p>
+<p>8种基本类型都不是Object的子类，在类型擦除的时候会出现问题所以在类型参数中不能使用基本类型</p>
+</li>
+<li><p>运行时类型查询只适用于原始类型（也就是定义的泛型类，不带其类型参数的形式）</p>
+<p>这也很好理解类型擦除的时候只留下了Object删除了类型参数，所以在使用<code>instanceof</code>的时候也只是判断是不是泛型类不带类型参数</p>
+<p>，强制类型转换也是类似。</p>
+<img src="D:/MD%E6%96%87%E6%A1%A3/Photo/java%E6%B3%9B%E5%9E%8B.assets/image-20211021211248589.png" alt="image-20211021211248589" style="zoom:50%;" /></li>
+</ul>
+<img src="D:/MD%E6%96%87%E6%A1%A3/Photo/java%E6%B3%9B%E5%9E%8B.assets/image-20211021211305760.png" alt="image-20211021211305760" style="zoom:50%;" />
+
+<img src="D:/MD%E6%96%87%E6%A1%A3/Photo/java%E6%B3%9B%E5%9E%8B.assets/image-20211021211326378.png" alt="image-20211021211326378" style="zoom:50%;" />
+
+
+
+<ul>
+<li><p>不能创建参数化类型的数组</p>
+<img src="D:/MD%E6%96%87%E6%A1%A3/Photo/java%E6%B3%9B%E5%9E%8B.assets/image-20211021211839853.png" alt="image-20211021211839853" style="zoom:50%;" /></li>
+</ul>
+<p>因为类型擦除，最后保留的是Pair其内部可以是Object类型的参数所以pair<String>和pair<Integer>都是可以存储的，这样就会后面有出错的可能，Java中直接设置为不能创建这样的数组</p>
+<p><strong>只是不允许创建这些数组，而声明类型为Pair<String>[]的变量仍是合法的。不过不能用new Pair<String>[10]初始化这个变量</strong></p>
+<p>==下面图片中的是什么原因？？？？？==</p>
+<p><img src="D:/MD%E6%96%87%E6%A1%A3/Photo/java%E6%B3%9B%E5%9E%8B.assets/image-20211021212158319.png" alt="image-20211021212158319"></p>
+<ul>
+<li><p>Varargs警告</p>
+<p><strong>向参数个数可变的方法传递一个泛型类型的实例</strong></p>
+</li>
+<li><p>不能实例化类型变量</p>
+<p>不能在内部使用<code>new T(...)</code>、<code>new T[...]</code>或<code>T.class</code>这样的表达式中的类型变量，</p>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -185,33 +325,75 @@
 		</ul>
 	</div>
 
-          
+      
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/10/21/java%E6%B3%9B%E5%9E%8B/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/10/18/Pytorch%E4%B8%AD%E7%9A%84%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/" class="archive-article-date">
-  	<time datetime="2021-10-18T06:15:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-18</time>
-</a>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Pytorch中的损失函数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
     <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/10/18/Pytorch%E4%B8%AD%E7%9A%84%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/">Pytorch中的损失函数</a>
+      <a class="article-title" href="/2021/10/18/Pytorch%E4%B8%AD%E7%9A%84%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/">Pytorch中的损失函数</a>
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2021/10/18/Pytorch%E4%B8%AD%E7%9A%84%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/" class="archive-article-date">
+  	<time datetime="2021-10-18T06:15:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li><p>BCELoss和BCEWithLogitsLoss</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_22210253/article/details/85222093">参考链接</a></p>
+</li>
+</ul>
+<p><img src="https://gitee.com/whutzhaochen/markdown/raw/master/img/20211018141810.png" alt="image-20211018141806934"></p>
+<p>在使用BCELoss之前需要先用SoftMax把数值映射到0到1之间，BCEWithLogitsLoss就是把这一步合并到内部减少操作</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -223,33 +405,123 @@
 		</ul>
 	</div>
 
-          
+      
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/10/18/Pytorch%E4%B8%AD%E7%9A%84%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/10/18/Java%E4%B8%AD%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%B7%A5%E5%85%B7%E7%B1%BB-SimpleDateFormat/" class="archive-article-date">
-  	<time datetime="2021-10-18T04:52:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-18</time>
-</a>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java中日期格式化工具类-SimpleDateFormat" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
     <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/10/18/Java%E4%B8%AD%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%B7%A5%E5%85%B7%E7%B1%BB-SimpleDateFormat/">Java中日期格式化工具类--SimpleDateFormat</a>
+      <a class="article-title" href="/2021/10/18/Java%E4%B8%AD%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%B7%A5%E5%85%B7%E7%B1%BB-SimpleDateFormat/">Java中日期格式化工具类--SimpleDateFormat</a>
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2021/10/18/Java%E4%B8%AD%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%B7%A5%E5%85%B7%E7%B1%BB-SimpleDateFormat/" class="archive-article-date">
+  	<time datetime="2021-10-18T04:52:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="日期格式化工具类SimpleDateFormat"><a href="#日期格式化工具类SimpleDateFormat" class="headerlink" title="日期格式化工具类SimpleDateFormat"></a>日期格式化工具类SimpleDateFormat</h1><h2 id="使用原因"><a href="#使用原因" class="headerlink" title="使用原因"></a>使用原因</h2><p>使用Date类的无参数构造函数得到的日期格式不是想要的格式。位于<code>java.text.SimpleDateFormat</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SimpleDateFormatDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Date currentTime = <span class="keyword">new</span> Date();</span><br><span class="line">        System.out.println(currentTime); <span class="comment">// 输出：Mon Feb 18 10:24:30 CST 2019</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="格式化Date到String输出"><a href="#格式化Date到String输出" class="headerlink" title="格式化Date到String输出"></a>格式化Date到String输出</h2><p>使用format()方法，我们可以将日期类型转换为自己自定义的字符串格式，如2019-02-18，2019/02/18，2019-02-18 10:24:30等，自定义格式如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th align="center">格式</th>
+<th align="center">含义</th>
+<th align="center">举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">yyyy</td>
+<td align="center">年</td>
+<td align="center">2019</td>
+</tr>
+<tr>
+<td align="center">MM</td>
+<td align="center">月</td>
+<td align="center">02</td>
+</tr>
+<tr>
+<td align="center">dd</td>
+<td align="center">日</td>
+<td align="center">18</td>
+</tr>
+<tr>
+<td align="center">HH</td>
+<td align="center">小时(24)</td>
+<td align="center">14</td>
+</tr>
+<tr>
+<td align="center">mm</td>
+<td align="center">分钟</td>
+<td align="center">53</td>
+</tr>
+<tr>
+<td align="center">ss</td>
+<td align="center">秒</td>
+<td align="center">52</td>
+</tr>
+<tr>
+<td align="center">SSS</td>
+<td align="center">毫秒</td>
+<td align="center">625</td>
+</tr>
+</tbody></table>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.text.SimpleDateFormat;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SimpleDateFormatDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        Date currentTime = <span class="keyword">new</span> Date();</span><br><span class="line"></span><br><span class="line">        System.out.println(currentTime);    <span class="comment">// Mon Feb 18 13:53:50 CST 2019</span></span><br><span class="line"></span><br><span class="line">        SimpleDateFormat simpleDateFormat1 = <span class="keyword">new</span> SimpleDateFormat(<span class="string">&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;</span>);</span><br><span class="line"></span><br><span class="line">        SimpleDateFormat simpleDateFormat2 = <span class="keyword">new</span> SimpleDateFormat(<span class="string">&quot;yyyy-MM-dd&quot;</span>);</span><br><span class="line"></span><br><span class="line">        SimpleDateFormat simpleDateFormat3 = <span class="keyword">new</span> SimpleDateFormat(<span class="string">&quot;yyyy/MM/dd&quot;</span>);</span><br><span class="line"></span><br><span class="line">        System.out.println(simpleDateFormat1.format(currentTime));  <span class="comment">// 输出2019-02-18 13:53:50.629</span></span><br><span class="line"></span><br><span class="line">        System.out.println(simpleDateFormat2.format(currentTime));  <span class="comment">// 输出2019-02-18</span></span><br><span class="line"></span><br><span class="line">        System.out.println(simpleDateFormat3.format(currentTime));  <span class="comment">// 输出2019/02/18</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="从String格式化到Date"><a href="#从String格式化到Date" class="headerlink" title="从String格式化到Date"></a>从String格式化到Date</h2><p>在实际开发过程中，我们经常需要将字符串转换为日期类型，以进行后续操作，此时可以使用parse()方法，但需要注意：如果字符串与指定的格式不匹配，会报java.text.ParseException异常</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.text.ParseException;</span><br><span class="line"><span class="keyword">import</span> java.text.SimpleDateFormat;</span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SimpleDateFormatDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            SimpleDateFormat simpleDateFormat1 = <span class="keyword">new</span> SimpleDateFormat(<span class="string">&quot;yyyy-MM-dd HH:mm&quot;</span>);</span><br><span class="line">            String strDate1 = <span class="string">&quot;2019-02-18 13:58&quot;</span>;</span><br><span class="line">            String strDate2 = <span class="string">&quot;2019-02-18&quot;</span>;</span><br><span class="line">            Date date1 = simpleDateFormat1.parse(strDate1);</span><br><span class="line">            System.out.println(date1);</span><br><span class="line">            Date date2 = simpleDateFormat1.parse(strDate2);</span><br><span class="line">            System.out.println(date2);</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (ParseException e) &#123;</span><br><span class="line"></span><br><span class="line">            e.printStackTrace();</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -261,33 +533,70 @@
 		</ul>
 	</div>
 
-          
+      
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/10/18/Java%E4%B8%AD%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%B7%A5%E5%85%B7%E7%B1%BB-SimpleDateFormat/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/10/14/Fully-Convolutional-Image-Classification-on-Arbitrary-Sized-Image/" class="archive-article-date">
-  	<time datetime="2021-10-14T08:45:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-14</time>
-</a>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Fully-Convolutional-Image-Classification-on-Arbitrary-Sized-Image" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
     <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/10/14/Fully-Convolutional-Image-Classification-on-Arbitrary-Sized-Image/">Fully Convolutional Image Classification on Arbitrary Sized Image</a>
+      <a class="article-title" href="/2021/10/14/Fully-Convolutional-Image-Classification-on-Arbitrary-Sized-Image/">Fully Convolutional Image Classification on Arbitrary Sized Image</a>
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2021/10/14/Fully-Convolutional-Image-Classification-on-Arbitrary-Sized-Image/" class="archive-article-date">
+  	<time datetime="2021-10-14T08:45:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>FC网络和CONV网络的区别在于输入时前者关注的是全局的特征，后者关注局部的特征。但是他们本质上是相似的因为这两者都是在计算点积，所以两者是可以相互转换的。 例如，一个FC的输入是一个5*5*16的tensor，输出的尺寸是120。转换的时候就可以使用120个5*5*16的filter来卷积，卷积核的大小是等于整个图片的大小的padding=0，stride=1这样就可以像全连接一样根据全局的特征输出。</p>
+<p><a target="_blank" rel="noopener" href="https://learnopencv.com/fully-convolutional-image-classification-on-arbitrary-sized-image/">参考链接</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -299,19 +608,45 @@
 		</ul>
 	</div>
 
-          
+      
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/10/14/Fully-Convolutional-Image-Classification-on-Arbitrary-Sized-Image/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-  
-    </div></section>
-  
 
-    
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    </nav>
+  
 
 
           </div>
@@ -333,9 +668,9 @@
     <script>
 	var yiliaConfig = {
 		mathjax: true,
-		isHome: false,
+		isHome: true,
 		isPost: false,
-		isArchive: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,

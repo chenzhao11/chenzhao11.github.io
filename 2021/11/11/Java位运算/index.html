@@ -6,15 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://chenzhao11.github.io">
-  <title>Archives: 2021/10 | nobodyZhao</title>
+  <title>Java位运算 | nobodyZhao</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="nobodyZhao">
-<meta property="og:url" content="https://chenzhao11.github.io/archives/2021/10/index.html">
+  <meta name="description" content="在Java语言中，提供了7种位运算符，分别是按位与（&amp;）、按位或（|）、按位异或（^）、取反()、左移(&lt;&lt;)、带符号右移(&gt;&gt;)和无符号右移(&gt;&gt;&gt;)。这些运算符当中，仅有是单目运算符，其他运算符均为双目运算符。在讲解这些运算符的使用之前，必须了解一个常识，那就是：位运算符是对long、int、short、byte和char这5种类型的数据进行运">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java位运算">
+<meta property="og:url" content="https://chenzhao11.github.io/2021/11/11/Java%E4%BD%8D%E8%BF%90%E7%AE%97/index.html">
 <meta property="og:site_name" content="nobodyZhao">
+<meta property="og:description" content="在Java语言中，提供了7种位运算符，分别是按位与（&amp;）、按位或（|）、按位异或（^）、取反()、左移(&lt;&lt;)、带符号右移(&gt;&gt;)和无符号右移(&gt;&gt;&gt;)。这些运算符当中，仅有是单目运算符，其他运算符均为双目运算符。在讲解这些运算符的使用之前，必须了解一个常识，那就是：位运算符是对long、int、short、byte和char这5种类型的数据进行运">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-b1d19a91b4a0239d86d39ec75739dd50_720w.jpg">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-4755d4862d514cf52f2aeda78d40ca30_720w.jpg">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-6e5c9939f3fca00675de5c1e3f1bf55c_720w.jpg">
+<meta property="og:image" content="https://pic2.zhimg.com/80/v2-cee83a4e2d9833b506eed5a847b8b2f5_720w.jpg">
+<meta property="article:published_time" content="2021-11-11T09:12:56.000Z">
+<meta property="article:modified_time" content="2021-11-11T09:43:12.115Z">
 <meta property="article:author" content="Zhao Chen">
+<meta property="article:tag" content="Java位运算">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic1.zhimg.com/80/v2-b1d19a91b4a0239d86d39ec75739dd50_720w.jpg">
   
     <link rel="alternative" href="/atom.xml" title="nobodyZhao" type="application/atom+xml">
   
@@ -144,174 +154,196 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Java位运算" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java位运算
+    </h1>
+  
+
+        
+        <a href="/2021/11/11/Java%E4%BD%8D%E8%BF%90%E7%AE%97/" class="archive-article-date">
+  	<time datetime="2021-11-11T09:12:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-11</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在Java语言中，提供了7种位运算符，分别是按位与（&amp;）、按位或（|）、按位异或（^）、取反(<del>)、左移(&lt;&lt;)、带符号右移(&gt;&gt;)和无符号右移(&gt;&gt;&gt;)。这些运算符当中，仅有</del>是单目运算符，其他运算符均为双目运算符。在讲解这些运算符的使用之前，必须了解一个常识，那就是：<strong>位运算符是对long、int、short、byte和char这5种类型的数据进行运算的</strong>，我们不能对double、float和boolean进行位运算操作。本文主要介绍左移，带符号右移和无符号右移三种方法。</p>
+<h2 id="左移"><a href="#左移" class="headerlink" title="左移"></a>左移</h2><blockquote>
+<p>对于byte/short/int三种类型的数据，Java语言最多支持31位的位移运算，对于long类型的数据而言，最多支持63位的位移运算。对于int来说对把左移的位数对32取余数</p>
+</blockquote>
+<p>左移运算符的写法是”&lt;&lt;“，看上去向两个向左的箭头，表示要把二进制数据在内存空间中向左边移动。使用左移运算符时，把想进行位移操作的操作数放最左面，之后写上左移运算符，在左移运算符的右边写上移动的位数。例如：5&lt;&lt;2就表示对数字5进行左移2位的操作。下图展示了进行左移操作之后，二进制串在内存中是怎样变化的：</p>
+<p><img src="https://pic1.zhimg.com/80/v2-b1d19a91b4a0239d86d39ec75739dd50_720w.jpg" alt="img"></p>
+<p>可以看到这个二进制串在内存中整体向左移动了两位，那么最左边的两位就跑到内存单元的外面去了，这两位数字将会被舍弃，右边空出的两位用0补齐。</p>
+<p>左移运算有乘以2的N次方的效果。一个数向左移动1位，就相当于乘以2的1次方，移动两位就相当于乘以2的2次方，也就是乘以4。位移操作在实际运算时远远快于乘法操作，所以在某些对运算速度要求非常高的场合，可以考虑用左移代替乘以2的N次方的乘法操作。但是需要提醒大家注意三个细节：</p>
+<p>首先：位移操作同取反操作一样，并不能改变变量本身的值，所能改变的仅是存储在操作数栈中那个数据的值,不理解这句话意思的小伙伴看下图：</p>
+<p><img src="https://pic1.zhimg.com/80/v2-4755d4862d514cf52f2aeda78d40ca30_720w.jpg" alt="img"></p>
+<p>其次：当位移的位数很多时，导致最左边的符号位发生变化，就不再具有乘以2的N次方的效果了。比如十进制的5转换为补码形式是：前面29个0最后3位是101，如果移动29位，那么最前面的符号位就变成了1，此时运算的结果就成为了一个负数，不再是5乘以2的29次方的乘法结果。</p>
+<h2 id="带符号右移"><a href="#带符号右移" class="headerlink" title="带符号右移"></a>带符号右移</h2><p>右移运算分为两种，分别是带符号右移和无符号右移。首先我们来说说带符号右移运算符。带符号右移运算符的写法是”&gt;&gt;“，与左移运算符的方向恰好相反。所谓带符号右移就是指当二进制串向右边移动以后，左边空出的位用”符号位上的数字”填充，说的更直白一点，如果是正数，二进制串右移的时候用0来填充左边的空位，而对于负数而言，右移的时候用1来填充左边的空位，如下图：</p>
+<p><img src="https://pic1.zhimg.com/80/v2-6e5c9939f3fca00675de5c1e3f1bf55c_720w.jpg" alt="img"></p>
+<p>从图上可以清楚的看到带符号右移操作在二进制串移动之后左边空位是怎样被填充的。之前强调过，左移N位的操作具有乘以2的N次方的效果，其实带符号右移也具有”类似”除以2的N次方的效果。请注意，这里说的是“类似”除以2的N次方的效果，为什么要加上“类似”两个字呢？就是因为对于正数而言，带符号右移之后产生的数字确实等于除以2的N次方，比如说我们把N的值设为3，对于正15，带符号右移3位的结果是1，这个结果与“15除以2的3次方”的结果是相同的。</p>
+<p>但是对于负数而言，带符号右移的效果分为两种情况，我们分别来讨论。</p>
+<p>如果这个负数是“2的N次方”的整数倍，那么带符号右移N位的效果也等于除以2的N次方。举个例子：我们还是把N的值设为3，如果对于“-16”来说，它是“2的3次方”的整数倍，那么带符号右移3位的结果是-2，这个结果相当于“-16除以2的3次方”。</p>
+<p>而如果这个负数不是“2的N次方”的整数倍，那么右移N位之后，是在除以2的N次方的结果之上还要减去1。比如，对于-15来说，它不是“2的3次方”的整数倍，那么带符号右移3位的结果是-2，这个运算结果其实就是“-15被2的3次方整除再减去1”。小伙伴们也可以用其他负整数来验证一下这个结论。因为并非每个负整数带符号右移的结果都等于除以“2的N次方”，所以我们才在文中添加了“类似”这两个字。==有问题？==</p>
+<p>带符号右移的操作可以保证移动之前和移动之后数字的正负属性不变，原来是正数，不管移动多少位，移动之后还是正数，原来是负数，移动之后还是负数。另外，我们还可以继续深挖一下这个特性，从而得到一个结论：<strong>对于任何一个byte、short或者int类型的数据而言，带符号右移31位(或更多位)之后，得到的必然是0或者是-1。对于long类型的数据而言，带符号右移63位(或更多位)之后，得到的也必然是0或者是-1。</strong>能够得出这个结论的依据也很简单，就是因为对于byte、short和int类型的变量而言，如果是正数，带符号右移31位之后产生的二进制串必然全部是0，转换成对应的十进制数就是0；而对于负数而言，带符号右移31位之后产生的二进制串必然全部是1，转换成十进制数就是-1。对于long类型的数据，带符号右移63位也具有相同效果。</p>
+<h2 id="无符号右移"><a href="#无符号右移" class="headerlink" title="无符号右移"></a>无符号右移</h2><p>前文已说过：右移运算分为两种，分别是带符号右移和无符号右移。现在再来讲解无符号右移。无符号右移运算符的写法是”&gt;&gt;&gt;”，比带符号右移多了一个”&gt;”。带符号右移的运算规则与无符号右移的运算规则差别就在于：无符号右移在二进制串移动之后，空位由0来补充，与符号位是0还是1毫无关系，如下图：</p>
+<p><img src="https://pic2.zhimg.com/80/v2-cee83a4e2d9833b506eed5a847b8b2f5_720w.jpg" alt="img"></p>
+<p>以上图片展示了无符号右移的运算规则。对于正数而言，无符号右移和带符号右移没有什么区别，而对于负数而言，经过无符号右移会产生一个正数，因为最左边的符号位被0填充了。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/10/21/java%E6%B3%9B%E5%9E%8B/" class="archive-article-date">
-  	<time datetime="2021-10-21T10:29:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/10/21/java%E6%B3%9B%E5%9E%8B/">java泛型</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">泛型</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Java位运算</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://chenzhao11.github.io/2021/11/11/Java%E4%BD%8D%E8%BF%90%E7%AE%97/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/10/18/Pytorch%E4%B8%AD%E7%9A%84%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/" class="archive-article-date">
-  	<time datetime="2021-10-18T06:15:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-18</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2021/11/11/java%E4%B8%AD%E7%9A%84%E6%A0%88/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          java中的栈
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/11/11/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E6%80%BB%E7%BB%93/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">二分查找总结</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/10/18/Pytorch%E4%B8%AD%E7%9A%84%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/">Pytorch中的损失函数</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">pytorch</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/10/18/Java%E4%B8%AD%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%B7%A5%E5%85%B7%E7%B1%BB-SimpleDateFormat/" class="archive-article-date">
-  	<time datetime="2021-10-18T04:52:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/10/18/Java%E4%B8%AD%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%B7%A5%E5%85%B7%E7%B1%BB-SimpleDateFormat/">Java中日期格式化工具类--SimpleDateFormat</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java, 日期格式化</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/10/14/Fully-Convolutional-Image-Classification-on-Arbitrary-Sized-Image/" class="archive-article-date">
-  	<time datetime="2021-10-14T08:45:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/10/14/Fully-Convolutional-Image-Classification-on-Arbitrary-Sized-Image/">Fully Convolutional Image Classification on Arbitrary Sized Image</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CNN</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -334,8 +366,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
